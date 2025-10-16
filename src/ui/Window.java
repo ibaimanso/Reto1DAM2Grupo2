@@ -15,6 +15,8 @@ public class Window extends JFrame {
 	public static int REGISTER_PANEL = 3;
 	public static int WORKOUT_PANEL  = 4;
 
+	private JPanel contentPanel = null;
+	
 	public JPanel[] panels = {
 		new ExercisePanel(this),
 		new HistoryPanel(this),
@@ -24,6 +26,15 @@ public class Window extends JFrame {
 	};
 
 	public Window() {
+		this.contentPanel = new JPanel();
+		this.contentPanel.setLayout(null);
+		this.setContentPane(this.contentPanel);
+		
+		for (JPanel panel: this.panels) {
+			this.add(panel);
+		} 
+		//this.add(this.panels[2]);
+		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle("GYM App");
 		this.setVisible(true);
