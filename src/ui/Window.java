@@ -16,11 +16,11 @@ public class Window extends JFrame {
 	public static int WORKOUT_PANEL  = 4;
 
 	public JPanel[] panels = {
-		new ExercisePanel(),
-		new HistoryPanel(),
-		new LoginPanel(),
-		new RegisterPanel(),
-		new WorkoutPanel()
+		new ExercisePanel(this),
+		new HistoryPanel(this),
+		new LoginPanel(this),
+		new RegisterPanel(this),
+		new WorkoutPanel(this)
 	};
 
 	public Window() {
