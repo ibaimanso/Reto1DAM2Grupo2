@@ -18,10 +18,19 @@ import firebase.exceptions.DBException;
 
 public class UserManager implements ManagerInterface<User> {
 	
+	private static UserManager instance = null;
+	
 	private String collectionName = null;
 	
 	public UserManager() {
 		this.collectionName = "users";
+	}
+	
+	public static UserManager getInstance() {
+		if (null == instance) {
+			instance = new UserManager();
+		}
+		return instance;
 	}
 
 	@Override

@@ -40,6 +40,10 @@ public class ManagerFactory {
 	public Firestore getDB() {
 		return this.db;
 	}
+
+	public UserManager getUserManager() {
+		return UserManager.getInstance();
+	}
 	
 	public void finalize() {
 		try {db.close();}
