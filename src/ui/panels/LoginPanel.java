@@ -1,7 +1,11 @@
 package ui.panels;
 
+import java.awt.GridLayout;
+
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextArea;
 
 import ui.Window;
@@ -12,10 +16,12 @@ public class LoginPanel extends JPanel {
 	
 	private Window window = null;
 	
-	private JLabel    nameLabel = null;
-	private JTextArea nameField = null;
-	private JLabel    pwLabel   = null;
-	private JTextArea pwField   = null;
+	private JLabel         nameLabel      = null;
+	private JTextArea      nameField      = null;
+	private JLabel         pwLabel        = null;
+	private JPasswordField pwField        = null;
+	private JButton        registerButton = null;
+	private JButton        loginButton    = null;
 
 
 	public LoginPanel(Window window) {
@@ -25,12 +31,24 @@ public class LoginPanel extends JPanel {
 	}
 	
 	private void builder() {
-		this.nameLabel = new JLabel("Nombre:");
-		this.nameField = new JTextArea();
-		this.pwLabel   = new JLabel("Contraseña:");
-		this.pwField   = new JTextArea();
+		this.setLayout(new GridLayout(3, 2));
 
-		this.add(nameField);
-		this.add(pwField);
+		this.nameLabel = new JLabel("Nombre:");
+		this.add(this.nameLabel);
+
+		this.nameField = new JTextArea();
+		this.add(this.nameField);
+
+		this.pwLabel   = new JLabel("Contraseña:");
+		this.add(this.pwLabel);
+
+		this.pwField   = new JPasswordField();
+		this.add(this.pwField);
+		
+		this.registerButton = new JButton("Registrarse");
+		this.add(this.registerButton);
+
+		this.loginButton = new JButton("Login");
+		this.add(this.loginButton);
 	}
 }
