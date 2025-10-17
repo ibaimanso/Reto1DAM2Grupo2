@@ -11,7 +11,7 @@ public class User {
 	private String  lname = null;
 	private String  pw    = null;
 	private String  email = null;
-	private String  brith = null;
+	private String  birth = null;
 
 	
 	public User(int id, String fname, String lname, String pw, String email, String birth) {
@@ -22,7 +22,18 @@ public class User {
 		this.lname   = lname;
 		this.pw      = pw;
 		this.email   = email;
-		this.brith   = birth;
+		this.birth   = birth;
+	}
+
+	public User(int id, String fname, String lname, String pw, String email, String birth, int level) {
+		this.trainer = false;
+		this.id      = id;
+		this.level   = level;
+		this.fname   = fname;
+		this.lname   = lname;
+		this.pw      = pw;
+		this.email   = email;
+		this.birth   = birth;
 	}
 
 	
@@ -82,17 +93,17 @@ public class User {
 		this.email = email;
 	}
 
-	public String getBrith() {
-		return brith;
+	public String getBirth() {
+		return birth;
 	}
 
-	public void setBrith(String brith) {
-		this.brith = brith;
+	public void setBirth(String birth) {
+		this.birth = birth;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(brith, email, fname, id, level, lname, pw, trainer);
+		return Objects.hash(birth, email, fname, id, level, lname, pw, trainer);
 	}
 
 	@Override
@@ -104,7 +115,7 @@ public class User {
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		return Objects.equals(brith, other.brith) && Objects.equals(email, other.email)
+		return Objects.equals(birth, other.birth) && Objects.equals(email, other.email)
 				&& Objects.equals(fname, other.fname) && id == other.id && level == other.level
 				&& Objects.equals(lname, other.lname) && Objects.equals(pw, other.pw) && trainer == other.trainer;
 	}
@@ -112,7 +123,7 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [trainer=" + trainer + ", id=" + id + ", level=" + level + ", fname=" + fname + ", lname=" + lname
-				+ ", pw=" + pw + ", email=" + email + ", brith=" + brith + "]";
+				+ ", pw=" + pw + ", email=" + email + ", birth=" + birth + "]";
 	}
 	
 }
