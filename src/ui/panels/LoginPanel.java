@@ -6,7 +6,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
-import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 import ui.Window;
 
@@ -17,7 +17,7 @@ public class LoginPanel extends JPanel {
 	private Window window = null;
 	
 	private JLabel         nameLabel      = null;
-	private JTextArea      nameField      = null;
+	private JTextField     nameField      = null;
 	private JLabel         pwLabel        = null;
 	private JPasswordField pwField        = null;
 	private JButton        registerButton = null;
@@ -36,7 +36,7 @@ public class LoginPanel extends JPanel {
 		this.nameLabel = new JLabel("Nombre:");
 		this.add(this.nameLabel);
 
-		this.nameField = new JTextArea();
+		this.nameField = new JTextField();
 		this.add(this.nameField);
 
 		this.pwLabel   = new JLabel("Contraseña:");
