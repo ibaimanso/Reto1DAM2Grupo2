@@ -41,8 +41,32 @@ public class ManagerFactory {
 		return this.db;
 	}
 
+	public ExerciseManager getExerciseManager() {
+		return ExerciseManager.getInstance();
+	}
+
+	public SeriesManager getSeriesManager() {
+		return SeriesManager.getInstance();
+	}
+
+	public UserExerciseLineManager getUserExerciseLineManager() {
+		return UserExerciseLineManager.getInstance();
+	}
+
 	public UserManager getUserManager() {
 		return UserManager.getInstance();
+	}
+
+	public UserSerieLineManager getUserSerieLineManager() {
+		return UserSerieLineManager.getInstance();
+	}
+
+	public UserWorkoutLineManager getUserWorkoutLineManager() {
+		return UserWorkoutLineManager.getInstance();
+	}
+
+	public WorkoutManager getWorkoutManager() {
+		return WorkoutManager.getInstance();
 	}
 	
 	public void finalize() {
