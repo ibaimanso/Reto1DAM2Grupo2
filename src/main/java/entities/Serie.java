@@ -18,6 +18,7 @@ public class Serie {
 		this.expectedTime = expectedTime;
 		this.restTime     = restTime;
 		this.repetitions  = repetitions;
+		this.name         = name;
 		this.iconPath     = iconPath;
 	}
 	
@@ -70,11 +71,11 @@ public class Serie {
 		this.name = name;
 	}
 
-	public String getIcon() {
+	public String getIconPath() {
 		return iconPath;
 	}
 
-	public void setIcon(String iconPath) {
+	public void setIconPath(String iconPath) {
 		this.iconPath = iconPath;
 	}
 
