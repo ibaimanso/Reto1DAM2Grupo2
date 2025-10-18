@@ -23,7 +23,7 @@ public class WorkoutManager implements ManagerInterface<Workout> {
 	private String collectionName = null;
 	
 	public WorkoutManager() {
-		this.collectionName = "workout";
+		this.collectionName = "workouts";
 	}
 	
 	public static WorkoutManager getInstance() {
