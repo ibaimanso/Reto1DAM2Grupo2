@@ -10,17 +10,16 @@ public class Serie {
 	private int    restTime     = 0;
 	private int    repetitions  = 0;
 	private String name         = null;
-	private byte[] icon         = null;
+	private String iconPath     = null;
 	
 	
-	public Serie(int id, int exerciseId, int expectedTime, int restTime, int repetitions, String name, byte[] icon) {
+	public Serie(int id, int exerciseId, int expectedTime, int restTime, int repetitions, String name, String iconPath) {
 		this.id           = id;
 		this.exerciseId   = exerciseId;
 		this.expectedTime = expectedTime;
 		this.restTime     = restTime;
 		this.repetitions  = repetitions;
-		this.name         = name;
-		this.icon         = icon;
+		this.iconPath     = iconPath;
 	}
 	
 
@@ -72,21 +71,17 @@ public class Serie {
 		this.name = name;
 	}
 
-	public byte[] getIcon() {
-		return icon;
+	public String getIcon() {
+		return iconPath;
 	}
 
-	public void setIcon(byte[] icon) {
-		this.icon = icon;
+	public void setIcon(String iconPath) {
+		this.iconPath = iconPath;
 	}
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + Arrays.hashCode(icon);
-		result = prime * result + Objects.hash(exerciseId, expectedTime, id, name, repetitions, restTime);
-		return result;
+		return Objects.hash(exerciseId, expectedTime, iconPath, id, name, repetitions, restTime);
 	}
 
 	@Override
@@ -98,15 +93,14 @@ public class Serie {
 		if (getClass() != obj.getClass())
 			return false;
 		Serie other = (Serie) obj;
-		return exerciseId == other.exerciseId && expectedTime == other.expectedTime && Arrays.equals(icon, other.icon)
-				&& id == other.id && Objects.equals(name, other.name) && repetitions == other.repetitions
-				&& restTime == other.restTime;
+		return exerciseId == other.exerciseId && expectedTime == other.expectedTime
+				&& Objects.equals(iconPath, other.iconPath) && id == other.id && Objects.equals(name, other.name)
+				&& repetitions == other.repetitions && restTime == other.restTime;
 	}
 
 	@Override
 	public String toString() {
 		return "Serie [id=" + id + ", exerciseId=" + exerciseId + ", expectedTime=" + expectedTime + ", restTime="
-				+ restTime + ", repetitions=" + repetitions + ", name=" + name + ", icon=" + Arrays.toString(icon)
-				+ "]";
+				+ restTime + ", repetitions=" + repetitions + ", name=" + name + ", iconPath=" + iconPath + "]";
 	}
 }
