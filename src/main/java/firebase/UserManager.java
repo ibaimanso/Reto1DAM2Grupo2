@@ -8,7 +8,6 @@ import java.util.Map;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.CollectionReference;
 import com.google.cloud.firestore.DocumentReference;
-import com.google.cloud.firestore.DocumentSnapshot;
 import com.google.cloud.firestore.Firestore;
 import com.google.cloud.firestore.QueryDocumentSnapshot;
 import com.google.cloud.firestore.QuerySnapshot;
@@ -53,32 +52,6 @@ public class UserManager implements ManagerInterface<User> {
 					user.getString("birth"),
 					user.getLong("level").intValue()
 				));
-			}
-		} catch (Exception ex) {
-			throw new DBException();
-		}
-
-		return ret;
-	}
-
-	@Override
-	public User selectById(int id) throws DBException {
-		User ret = null;
-		
-		try {
-			Firestore db = ManagerFactory.getInstance().getDB();
-			DocumentReference dr = db.collection(this.collectionName).document(String.valueOf(id));
-			DocumentSnapshot  ds = dr.get().get();
-			if (null != ds) {
-				ret = new User(
-					ds.getLong("id").intValue(),
-					ds.getString("fname"),
-					ds.getString("lname"),
-					ds.getString("pw"),
-					ds.getString("email"),
-					ds.getString("birth"),
-					ds.getLong("level").intValue()
-				);
 			}
 		} catch (Exception ex) {
 			throw new DBException();

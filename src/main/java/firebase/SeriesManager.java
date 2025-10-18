@@ -8,7 +8,6 @@ import java.util.Map;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.CollectionReference;
 import com.google.cloud.firestore.DocumentReference;
-import com.google.cloud.firestore.DocumentSnapshot;
 import com.google.cloud.firestore.Firestore;
 import com.google.cloud.firestore.QueryDocumentSnapshot;
 import com.google.cloud.firestore.QuerySnapshot;
@@ -41,44 +40,18 @@ public class SeriesManager implements ManagerInterface<Serie> {
 			Firestore db = ManagerFactory.getInstance().getDB();
 			ApiFuture<QuerySnapshot> query = db.collection(collectionName).get();
 			QuerySnapshot qs = query.get();
-			List<QueryDocumentSnapshot> users = qs.getDocuments();
+			List<QueryDocumentSnapshot> series = qs.getDocuments();
 			if (null == ret) ret = new ArrayList<Serie>();
-			for (QueryDocumentSnapshot user: users) {
+			for (QueryDocumentSnapshot serie: series) {
 				ret.add(new Serie(
-					user.getLong("id").intValue(),
-					user.getLong("exerciseId").intValue(),
-					user.getLong("expectedTime").intValue(),
-					user.getLong("restTime").intValue(),
-					user.getLong("repetitions").intValue(),
-					user.getString("name"),
-					user.getString("iconPath")
+					serie.getLong("id").intValue(),
+					serie.getLong("exerciseId").intValue(),
+					serie.getLong("expectedTime").intValue(),
+					serie.getLong("restTime").intValue(),
+					serie.getLong("repetitions").intValue(),
+					serie.getString("name"),
+					serie.getString("iconPath")
 				));
-			}
-		} catch (Exception ex) {
-			throw new DBException();
-		}
-
-		return ret;
-	}
-
-	@Override
-	public Serie selectById(int id) throws DBException {
-		Serie ret = null;
-		
-		try {
-			Firestore db = ManagerFactory.getInstance().getDB();
-			DocumentReference dr = db.collection(this.collectionName).document(String.valueOf(id));
-			DocumentSnapshot  ds = dr.get().get();
-			if (null != ds) {
-				ret = new Serie(
-					ds.getLong("id").intValue(),
-					ds.getLong("exerciseId").intValue(),
-					ds.getLong("expectedTime").intValue(),
-					ds.getLong("restTime").intValue(),
-					ds.getLong("repetitions").intValue(),
-					ds.getString("name"),
-					ds.getString("iconPath")
-				);
 			}
 		} catch (Exception ex) {
 			throw new DBException();

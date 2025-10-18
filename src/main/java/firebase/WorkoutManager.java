@@ -8,7 +8,6 @@ import java.util.Map;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.CollectionReference;
 import com.google.cloud.firestore.DocumentReference;
-import com.google.cloud.firestore.DocumentSnapshot;
 import com.google.cloud.firestore.Firestore;
 import com.google.cloud.firestore.QueryDocumentSnapshot;
 import com.google.cloud.firestore.QuerySnapshot;
@@ -41,40 +40,16 @@ public class WorkoutManager implements ManagerInterface<Workout> {
 			Firestore db = ManagerFactory.getInstance().getDB();
 			ApiFuture<QuerySnapshot> query = db.collection(collectionName).get();
 			QuerySnapshot qs = query.get();
-			List<QueryDocumentSnapshot> users = qs.getDocuments();
+			List<QueryDocumentSnapshot> workouts = qs.getDocuments();
 			if (null == ret) ret = new ArrayList<Workout>();
-			for (QueryDocumentSnapshot user: users) {
+			for (QueryDocumentSnapshot workout: workouts) {
 				ret.add(new Workout(
-					user.getLong("id").intValue(),
-					user.getLong("level").intValue(),
-					user.getString("name"),
-					user.getString("descript"),
-					user.getString("videoURL")
+					workout.getLong("id").intValue(),
+					workout.getLong("level").intValue(),
+					workout.getString("name"),
+					workout.getString("descript"),
+					workout.getString("videoURL")
 				));
-			}
-		} catch (Exception ex) {
-			throw new DBException();
-		}
-
-		return ret;
-	}
-
-	@Override
-	public Workout selectById(int id) throws DBException {
-		Workout ret = null;
-		
-		try {
-			Firestore db = ManagerFactory.getInstance().getDB();
-			DocumentReference dr = db.collection(this.collectionName).document(String.valueOf(id));
-			DocumentSnapshot  ds = dr.get().get();
-			if (null != ds) {
-				ret = new Workout(
-					ds.getLong("id").intValue(),
-					ds.getLong("level").intValue(),
-					ds.getString("name"),
-					ds.getString("descript"),
-					ds.getString("videoURL")
-				);
 			}
 		} catch (Exception ex) {
 			throw new DBException();
