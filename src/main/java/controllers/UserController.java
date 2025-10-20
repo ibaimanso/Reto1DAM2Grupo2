@@ -83,8 +83,12 @@ public class UserController {
 		ManagerFactory.getInstance().getUserManager().update(user);
 	}
 	
-	public void delete(User user) throws DBException {
-		ManagerFactory.getInstance().getUserManager().delete(user);
+	public void delete(User user) {
+		try {
+			ManagerFactory.getInstance().getUserManager().delete(user);
+		} catch (DBException ex) {
+			// #TODO: tratar de borrar la versión en local.
+		}
 		ControllerFactory.getInstance().getUserWorkoutLineController().deleteByUserId(user.getId());
 		ControllerFactory.getInstance().getUserExerciseLineController().deleteByUserId(user.getId());
 		ControllerFactory.getInstance().getUserSerieLineController().deleteByUserId(user.getId());
