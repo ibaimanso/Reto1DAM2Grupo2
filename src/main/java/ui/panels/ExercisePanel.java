@@ -12,6 +12,9 @@ public class ExercisePanel extends JPanel {
 
 	public ExercisePanel(Window window) {
 		this.window = window;
+		this.setVisible(true);
+		this.setSize(600, 500);
+		
 	}
 	
 }
