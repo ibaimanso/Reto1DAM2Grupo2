@@ -1,6 +1,8 @@
 package ui.panels;
 
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -46,9 +48,27 @@ public class LoginPanel extends JPanel {
 		this.add(this.pwField);
 		
 		this.registerButton = new JButton("Registrarse");
+		this.registerButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				register();
+			}
+		});
 		this.add(this.registerButton);
 
 		this.loginButton = new JButton("Login");
+		this.loginButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				login();
+			}
+		});
 		this.add(this.loginButton);
+	}
+	
+	private void register() {
+		
+	}
+	
+	private void login() {
+		
 	}
 }
