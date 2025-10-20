@@ -29,7 +29,7 @@ public class Window extends JFrame {
 		} 
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setTitle("GYM App");
+		this.setTitle("Elorrieta GYM");
 		this.setVisible(true);
 		this.showPanel(Window.LOGIN_PANEL);
 	}
