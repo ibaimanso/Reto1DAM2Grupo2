@@ -14,29 +14,35 @@ public class Window extends JFrame {
 	public static int LOGIN_PANEL    = 2;
 	public static int REGISTER_PANEL = 3;
 	public static int WORKOUT_PANEL  = 4;
+	public static int WORKOUT_DETAIL_PANEL = 5;
 
 	public JPanel[] panels = {
 		new ExercisePanel(this),
 		new HistoryPanel(this),
 		new LoginPanel(this),
 		new RegisterPanel(this),
-		new WorkoutPanel(this)
+		new WorkoutPanel(this),
 	};
 
 	public Window() {
+		/*
 		for (JPanel panel: this.panels) {
 			this.add(panel);
-		} 
+		}
+		*/
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle("Elorrieta GYM");
+		//this.setSize(600,500);
+		//this.setResizable(false);
 		this.setVisible(true);
 		this.showPanel(Window.LOGIN_PANEL);
 	}
 	
 	public void showPanel(int panelToShow) {
-		this.add(this.panels[panelToShow]);
-		this.pack();
+		this.setContentPane(this.panels[panelToShow]);
+		this.setSize(600, 500);
+		this.setResizable(false);
 	}
 	
 	public void start() {
