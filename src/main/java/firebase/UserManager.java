@@ -50,6 +50,7 @@ public class UserManager implements ManagerInterface<User> {
 					user.getString("pw"),
 					user.getString("email"),
 					user.getString("birth"),
+					user.getString("lastMod"),
 					user.getLong("level").intValue()
 				));
 			}
@@ -72,6 +73,7 @@ public class UserManager implements ManagerInterface<User> {
 		userMap.put("pw",    t.getPw());
 		userMap.put("email", t.getEmail());
 		userMap.put("birth", t.getBirth());
+		userMap.put("lastMod", t.getLastMod());
 		userMap.put("level", t.getLevel());
 
 		DocumentReference dr = query.document(String.valueOf(t.getId()));
@@ -90,6 +92,7 @@ public class UserManager implements ManagerInterface<User> {
 		userMap.put("pw",    t.getPw());
 		userMap.put("email", t.getEmail());
 		userMap.put("birth", t.getBirth());
+		userMap.put("lastMod", t.getLastMod());
 		userMap.put("level", t.getLevel());
 
 		dr.update(userMap);
