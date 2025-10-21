@@ -46,9 +46,17 @@ public class LoginPanel extends JPanel {
 		this.add(this.pwField);
 		
 		this.registerButton = new JButton("Registrarse");
+		
+		registerButton.addActionListener(e ->
+		window.showPanel(Window.REGISTER_PANEL)
+		);
+		
 		this.add(this.registerButton);
 
 		this.loginButton = new JButton("Login");
+			loginButton.addActionListener(e ->
+			window.showPanel(Window.WORKOUT_PANEL)
+			);
 		this.add(this.loginButton);
 	}
 }

@@ -35,6 +35,9 @@ public class WorkoutPanel extends JPanel {
 		
 		JButton btnSeleccionarWorkout = new JButton("Seleccionar");
 		btnSeleccionarWorkout.setBounds(299, 381, 168, 23);
+		btnSeleccionarWorkout.addActionListener(e ->
+		window.showPanel(Window.EXERCISE_PANEL)
+		);
 		add(btnSeleccionarWorkout);
 		
 	}

@@ -6,6 +6,7 @@ import ui.Window;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
+import javax.swing.JButton;
 
 public class RegisterPanel extends JPanel {
 
@@ -51,7 +52,7 @@ public class RegisterPanel extends JPanel {
 		
 		JLabel lblFechaDeNacimiento = new JLabel("Fecha de Nacimiento:");
 		lblFechaDeNacimiento.setHorizontalAlignment(SwingConstants.CENTER);
-		lblFechaDeNacimiento.setBounds(88, 319, 121, 33);
+		lblFechaDeNacimiento.setBounds(72, 319, 121, 33);
 		add(lblFechaDeNacimiento);
 		
 		textFieldNombre = new JTextField();
@@ -78,5 +79,13 @@ public class RegisterPanel extends JPanel {
 		textFechaDeNacimiento.setColumns(10);
 		textFechaDeNacimiento.setBounds(202, 323, 175, 20);
 		add(textFechaDeNacimiento);
+		
+		JButton btnContinuar = new JButton("Continuar");
+		btnContinuar.setBounds(288, 354, 89, 23);
+		add(btnContinuar);
+		
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.setBounds(202, 354, 89, 23);
+		add(btnCancelar);
 	}
 }

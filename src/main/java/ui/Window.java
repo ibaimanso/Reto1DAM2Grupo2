@@ -25,21 +25,24 @@ public class Window extends JFrame {
 	};
 
 	public Window() {
+		/*
 		for (JPanel panel: this.panels) {
 			this.add(panel);
-		} 
+		}
+		*/
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle("Elorrieta GYM");
-		this.setSize(600,500);
-		this.setResizable(false);
+		//this.setSize(600,500);
+		//this.setResizable(false);
 		this.setVisible(true);
 		this.showPanel(Window.LOGIN_PANEL);
 	}
 	
 	public void showPanel(int panelToShow) {
-		this.add(this.panels[panelToShow]);
-		this.pack();
+		this.setContentPane(this.panels[panelToShow]);
+		this.setSize(600, 500);
+		this.setResizable(false);
 	}
 	
 	public void start() {
