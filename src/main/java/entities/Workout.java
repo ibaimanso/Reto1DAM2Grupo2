@@ -11,7 +11,7 @@ public class Workout {
 	private String videoUrl = null;
 	
 	
-	public Workout(int id, int level, String name, String descript, String videoUrl) {
+	public Workout(int id, String name, String descript, String videoUrl, int level) {
 		this.id       = id;
 		this.level    = level;
 		this.name     = name;
@@ -80,7 +80,7 @@ public class Workout {
 
 	@Override
 	public String toString() {
-		return "Workout [id=" + id + ", level=" + level + ", name=" + name + ", descript=" + descript + ", videoUrl="
-				+ videoUrl + "]";
+		return "Workout [id=" + id + ", name=" + name + ", descript=" + descript + ", videoUrl="
+				+ videoUrl + ", level=" + level + "]";
 	}
 }
