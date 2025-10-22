@@ -15,19 +15,19 @@ import com.google.cloud.firestore.QuerySnapshot;
 import entities.Serie;
 import firebase.exceptions.DBException;
 
-public class SeriesManager implements ManagerInterface<Serie> {
+public class SerieManager implements ManagerInterface<Serie> {
 	
-	private static SeriesManager instance = null;
+	private static SerieManager instance = null;
 	
 	private String collectionName = null;
 	
-	public SeriesManager() {
+	public SerieManager() {
 		this.collectionName = "series";
 	}
 	
-	public static SeriesManager getInstance() {
+	public static SerieManager getInstance() {
 		if (null == instance) {
-			instance = new SeriesManager();
+			instance = new SerieManager();
 		}
 		return instance;
 	}

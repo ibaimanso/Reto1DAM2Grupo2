@@ -45,10 +45,10 @@ public class WorkoutManager implements ManagerInterface<Workout> {
 			for (QueryDocumentSnapshot workout: workouts) {
 				ret.add(new Workout(
 					workout.getLong("id").intValue(),
-					workout.getLong("level").intValue(),
 					workout.getString("name"),
 					workout.getString("descript"),
-					workout.getString("videoURL")
+					workout.getString("videoURL"),
+					workout.getLong("level").intValue()
 				));
 			}
 		} catch (Exception ex) {
@@ -65,10 +65,10 @@ public class WorkoutManager implements ManagerInterface<Workout> {
 
 		Map<String, Object> workoutMap = new HashMap<>();
 		workoutMap.put("id",       t.getId());
-		workoutMap.put("level",    t.getLevel());
 		workoutMap.put("name",     t.getName());
 		workoutMap.put("descript", t.getDescript());
 		workoutMap.put("videoUrl", t.getVideoUrl());
+		workoutMap.put("level",    t.getLevel());
 
 		DocumentReference dr = query.document(String.valueOf(t.getId()));
 		dr.set(workoutMap);
@@ -81,10 +81,10 @@ public class WorkoutManager implements ManagerInterface<Workout> {
 
 		Map<String, Object> workoutMap = new HashMap<>();
 		workoutMap.put("id",       t.getId());
-		workoutMap.put("level",    t.getLevel());
 		workoutMap.put("name",     t.getName());
 		workoutMap.put("descript", t.getDescript());
 		workoutMap.put("videoUrl", t.getVideoUrl());
+		workoutMap.put("level",    t.getLevel());
 
 		dr.update(workoutMap);
 	}

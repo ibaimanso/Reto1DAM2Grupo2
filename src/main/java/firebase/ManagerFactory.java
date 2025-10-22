@@ -45,8 +45,8 @@ public class ManagerFactory {
 		return ExerciseManager.getInstance();
 	}
 
-	public SeriesManager getSeriesManager() {
-		return SeriesManager.getInstance();
+	public SerieManager getSeriesManager() {
+		return SerieManager.getInstance();
 	}
 
 	public UserExerciseLineManager getUserExerciseLineManager() {
