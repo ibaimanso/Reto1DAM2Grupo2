@@ -7,6 +7,8 @@ import controllers.exceptinos.PKException;
 import entities.User;
 import firebase.ManagerFactory;
 import firebase.exceptions.DBException;
+import xml.ManagerFactoryXML;
+import xml.exceptions.XMLException;
 
 public class UserController {
 	
@@ -83,7 +85,7 @@ public class UserController {
 		ManagerFactory.getInstance().getUserManager().update(user);
 	}
 	
-	public void delete(User user) {
+	public void delete(User user) throws XMLException{
 		try {
 			ManagerFactory.getInstance().getUserManager().delete(user);
 		} catch (DBException ex) {}
