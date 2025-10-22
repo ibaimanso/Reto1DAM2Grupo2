@@ -85,4 +85,35 @@ public class ManagerFactoryXML {
 			throw new XMLException(ex.getMessage());
 		}
 	}
+	
+	public ExerciseManager getExerciseManager() throws XMLException{
+		return ExerciseManager.getInstance();
+	}
+	
+	public SerieManager getSerieManager() throws XMLException{
+		return SerieManager.getInstance();
+	}
+	
+	public WorkoutManager getWorkoutManager() throws XMLException{
+		return WorkoutManager.getInstance();
+	}
+
+	public UserManager getUserManager() throws XMLException{
+		return UserManager.getInstance();
+	}
+	
+	public UserExerciseLineManager getUserExerciseLineManager() throws XMLException{
+		return UserExerciseLineManager.getInstance();
+	}
+
+	public UserSerieLineManager getUserSerieLineManager() throws XMLException{
+		return UserSerieLineManager.getInstance();
+	}
+
+	public UserWorkoutLineManager getUserWorkoutLineManager() throws XMLException{
+		return UserWorkoutLineManager.getInstance();
+	}
+
+
+	
 }

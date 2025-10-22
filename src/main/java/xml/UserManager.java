@@ -14,18 +14,16 @@ import xml.exceptions.XMLException;
 
 public class UserManager implements ManagerInterfaceXML<User> {
 
-	private static UserManager instance = null;
-    private static final String NAME = "users.xml" ;
-    private final String entityName = "user";
-    
-        
-	private String                 filePath   = null;
+    private static final String      NAME        = "users.xml" ;
+    private static final String      ENTITY_NAME = "user";
+    private static       UserManager instance    = null;
+	private              String      filePath    = null;
 	
 	public UserManager() throws XMLException {
 		this.filePath = ManagerFactoryXML.getInstance().getPath() + NAME;
 		
 		if (!new File(this.filePath).exists()) {
-			ManagerFactoryXML.getInstance().createDocument(this.filePath, this.entityName+"");
+			ManagerFactoryXML.getInstance().createDocument(this.filePath, ENTITY_NAME+"s");
 		}
 		
 	}
@@ -37,7 +35,7 @@ public class UserManager implements ManagerInterfaceXML<User> {
 		return instance;
 	}
 	
-	private User fromElementToUser(Element userElement) {
+	private User fromElementToEntity(Element userElement) {
 		return new User(
 			Integer.parseInt(userElement.getAttribute("id")),
 			userElement.getAttribute("fname"),
@@ -58,10 +56,10 @@ public class UserManager implements ManagerInterfaceXML<User> {
 			Document document = ManagerFactoryXML.getInstance().loadDocument(this.filePath);
 			document.getDocumentElement().normalize();
 			
-			NodeList userNodeList = document.getElementsByTagName(entityName);
+			NodeList userNodeList = document.getElementsByTagName(ENTITY_NAME);
 			
 			for (int i = 0; i < userNodeList.getLength(); i++) {
-				ret.add(fromElementToUser((Element)userNodeList.item(i)));
+				ret.add(fromElementToEntity((Element)userNodeList.item(i)));
 			}
 		} catch (Exception ex) {
 			throw new XMLException();
@@ -76,7 +74,7 @@ public class UserManager implements ManagerInterfaceXML<User> {
 			Document document = ManagerFactoryXML.getInstance().loadDocument(this.filePath);
 			Element root = document.getDocumentElement();
 			
-			Element userElement = document.createElement(entityName);
+			Element userElement = document.createElement(ENTITY_NAME);
 			userElement.setAttribute("id", String.valueOf(t.getId()));
 			userElement.setAttribute("fname", t.getFname());
 			userElement.setAttribute("lname", t.getLname());
@@ -97,7 +95,7 @@ public class UserManager implements ManagerInterfaceXML<User> {
 	@Override
 	public void update(User t) throws XMLException {
 		Document doc = ManagerFactoryXML.getInstance().loadDocument(this.filePath);
-		NodeList users = doc.getElementsByTagName(entityName);
+		NodeList users = doc.getElementsByTagName(ENTITY_NAME);
 		
 		for (int i = 0; i < users.getLength(); i++) {
 			Element user = (Element) users.item(i);
@@ -120,7 +118,7 @@ public class UserManager implements ManagerInterfaceXML<User> {
 	@Override
 	public void delete(User t) throws XMLException {
 		Document doc = ManagerFactoryXML.getInstance().loadDocument(this.filePath);
-		NodeList users = doc.getElementsByTagName(entityName);
+		NodeList users = doc.getElementsByTagName(ENTITY_NAME);
 		
 		for (int i = 0; i < users.getLength(); i++) {
 			Element user = (Element) users.item(i);
