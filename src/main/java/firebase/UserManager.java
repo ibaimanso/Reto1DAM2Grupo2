@@ -51,7 +51,8 @@ public class UserManager implements ManagerInterface<User> {
 					user.getString("email"),
 					user.getString("birth"),
 					user.getString("lastMod"),
-					user.getLong("level").intValue()
+					user.getLong("level").intValue(),
+					user.getBoolean("trainer")
 				));
 			}
 		} catch (Exception ex) {
@@ -67,6 +68,7 @@ public class UserManager implements ManagerInterface<User> {
 		CollectionReference query = db.collection(this.collectionName);
 
 		Map<String, Object> userMap = new HashMap<>();
+		userMap.put("trainer", t.isTrainer());
 		userMap.put("id",    t.getId());
 		userMap.put("fname", t.getFname());
 		userMap.put("lname", t.getLname());
@@ -86,6 +88,7 @@ public class UserManager implements ManagerInterface<User> {
 		DocumentReference dr = db.collection(collectionName).document(String.valueOf(t.getId()));
 
 		Map<String, Object> userMap = new HashMap<>();
+		userMap.put("trainer", t.isTrainer());
 		userMap.put("id",    t.getId());
 		userMap.put("fname", t.getFname());
 		userMap.put("lname", t.getLname());
