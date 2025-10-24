@@ -10,6 +10,9 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import controllers.ControllerFactory;
+import controllers.exceptions.NameIsAlreadyUsedException;
+import entities.User;
 import ui.Window;
 
 public class LoginPanel extends JPanel {
@@ -65,12 +68,20 @@ public class LoginPanel extends JPanel {
 	}
 	
 	private void register() {
-		
 		window.showPanel(Window.REGISTER_PANEL);
 		
 	}
 	
 	private void login() {
-			window.showPanel(Window.WORKOUT_PANEL);
+		User user = null;
+		try {
+			user = new User(0, nameField.getText(), null, pwField.getPassword().toString(), null, null, null, false)
+			ControllerFactory.getInstance().getUserController().existLogin()
+		} catch (Exception ex) {
+			
+		}
+		
+		
+		window.showPanel(Window.WORKOUT_PANEL);
 	}
 }

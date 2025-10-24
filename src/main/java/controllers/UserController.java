@@ -105,6 +105,17 @@ public class UserController {
 		// #TODO Llamar al proceso de backup para descargar toda la base de datos en local
 	}
 	
-	
+	public boolean existLogin(User user) throws DBException{
+		List<User> users = ManagerFactory.getInstance().getUserManager().selectAll();
+		
+		for (User user2 : users) {
+			if (!user2.getFname().equals(user.getFname())) {
+				continue;
+			}
+
+			return user2.getPw().equals(user.getPw());
+		}
+		return false;
+	}
 	
 }
