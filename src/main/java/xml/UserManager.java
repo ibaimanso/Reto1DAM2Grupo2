@@ -44,7 +44,8 @@ public class UserManager implements ManagerInterfaceXML<User> {
 			userElement.getAttribute("email"),
 			userElement.getAttribute("birth"),
 			userElement.getAttribute("lastMod"),
-			Integer.parseInt(userElement.getAttribute("level"))
+			Integer.parseInt(userElement.getAttribute("level")),
+			userElement.getAttribute("trainer").equals("true") ? true: false
 		);
 	}
 	
@@ -75,6 +76,7 @@ public class UserManager implements ManagerInterfaceXML<User> {
 			Element root = document.getDocumentElement();
 			
 			Element userElement = document.createElement(ENTITY_NAME);
+			userElement.setAttribute("trainer", t.isTrainer() ? "true":"false");
 			userElement.setAttribute("id", String.valueOf(t.getId()));
 			userElement.setAttribute("fname", t.getFname());
 			userElement.setAttribute("lname", t.getLname());
@@ -103,6 +105,7 @@ public class UserManager implements ManagerInterfaceXML<User> {
 			if (Integer.parseInt(user.getAttribute("id")) != t.getId()) {
 				continue;
 			}
+			user.setAttribute("trainer", t.isTrainer() ? "true":"false");
 			user.setAttribute("id", String.valueOf(t.getId()));
 			user.setAttribute("fname", t.getFname());
 			user.setAttribute("lname", t.getLname());

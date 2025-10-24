@@ -20,21 +20,25 @@ public class HistoryPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	
-	private Window window;
-	private DefaultListModel<String> listModel;
-	private JList<String> historyList;
-	private JButton profileButton;
-	private JButton backButton;
+	private Window window = null;
+	
+	private DefaultListModel<String> listModel   = null;
+	private JList<String>            historyList = null;
+	
+	private JButton profileButton = null;
+	private JButton backButton    = null;
+	private JPanel  topBar        = null;
+	private JLabel  title         = null;
 
 	public HistoryPanel() {
-		this(null);
+		//this(null);
 	}
 
 	public HistoryPanel(Window window) {
 		this.window = window;
 		this.setLayout(new BorderLayout());
 
-		JPanel topBar = new JPanel(new BorderLayout());
+		topBar = new JPanel(new BorderLayout());
 		profileButton = new JButton("Perfil");
 		profileButton.setPreferredSize(new Dimension(100, 30));
 		profileButton.addActionListener(new ActionListener() {
@@ -59,7 +63,7 @@ public class HistoryPanel extends JPanel {
 		});
 		topBar.add(backButton, BorderLayout.EAST);
 
-		JLabel title = new JLabel("Historial de Workouts", SwingConstants.CENTER);
+		title = new JLabel("Historial de Workouts", SwingConstants.CENTER);
 		topBar.add(title, BorderLayout.CENTER);
 
 		this.add(topBar, BorderLayout.NORTH);

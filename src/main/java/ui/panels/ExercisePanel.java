@@ -26,19 +26,19 @@ public class ExercisePanel extends JPanel {
 	
 	private Window window = null;
 
-	private JLabel lblWorkoutName;
-	private JLabel lblExerciseName;
-	private JLabel lblDescription;
-	private JLabel lblTotalTimer;
-	private JLabel lblSeriesCountdown;
-	private JPanel seriesListPanel;
-	private JButton btnStartPauseNext;
-	private JButton btnExit;
+	private JLabel  lblWorkoutName     = null;
+	private JLabel  lblExerciseName    = null;
+	private JLabel  lblDescription     = null;
+	private JLabel  lblTotalTimer      = null;
+	private JLabel  lblSeriesCountdown = null;
+	private JPanel  seriesListPanel    = null;
+	private JButton btnStartPauseNext  = null;
+	private JButton btnExit            = null;
 
-	private Timer totalTimer; 
-	private Timer countdownTimer; 
-	private int totalSeconds = 0;
-	private int remainingSeconds = 0;
+	private Timer totalTimer       = null; 
+	private Timer countdownTimer   = null; 
+	private int   totalSeconds     = 0;
+	private int   remainingSeconds = 0;
 	
 	private enum State { IDLE, RUNNING, PAUSED, COMPLETED }
 	private State state = State.IDLE;
@@ -50,10 +50,10 @@ public class ExercisePanel extends JPanel {
 
 	// Informacion de prueba que se cambiara por la informacion recogida de firebase Firebase
 	public static class SeriesData {
-		public String name;
-		public int reps;
-		public int durationSeconds;
-		public int restSeconds;
+		public String name = null;
+		public int reps = 0;
+		public int durationSeconds = 0;
+		public int restSeconds = 0;
 		public ImageIcon photo;
 		
 		public SeriesData(String name, int reps, int durationSeconds, int restSeconds, ImageIcon photo) {

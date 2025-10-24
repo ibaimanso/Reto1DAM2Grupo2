@@ -2,8 +2,8 @@ package controllers;
 
 import java.util.List;
 
-import controllers.exceptinos.NameIsAlreadyUsedException;
-import controllers.exceptinos.PKException;
+import controllers.exceptions.NameIsAlreadyUsedException;
+import controllers.exceptions.PKException;
 import entities.User;
 import firebase.ManagerFactory;
 import firebase.exceptions.DBException;
@@ -23,20 +23,16 @@ public class UserController {
 		return instance;
 	}
 	
-	private int nextId() throws PKException {
+	private int nextId() throws PKException, DBException {
 		List<User> users = null;
-
-		try {
-			users = ManagerFactory.getInstance().getUserManager().selectAll();
-		} catch (DBException ex) {
-			// #TODO: Se debe hacer que la consulta la realice en local.
-		}
 		
+		users = ManagerFactory.getInstance().getUserManager().selectAll();
+			
 		if (null == users) {
 			throw new PKException();
 		}
 		
-		int highestId = 1;
+		int highestId = 0;
 		
 		for (User user: users) {
 			if (user.getId() > highestId) {
@@ -44,21 +40,13 @@ public class UserController {
 			}
 		}
 		
-		return highestId;
+		return highestId + 1;
 	}
 	
 	private boolean existsThisFname(String userFname) throws DBException {
 		List<User> users = null;
 
-		try {
-			users = ManagerFactory.getInstance().getUserManager().selectAll();
-		} catch (DBException ex) {
-			// #TODO: hacer conecxión a local.
-		}
-		
-		if (null == users) {
-			throw new DBException();
-		}
+		users = ManagerFactory.getInstance().getUserManager().selectAll();
 		
 		for (User user: users) {
 			if (user.getFname().equals(userFname)) {
@@ -69,29 +57,54 @@ public class UserController {
 		return false;
 	}
 	
-	public void insert(User user) throws DBException, PKException, NameIsAlreadyUsedException {
+	public void insert(User user) throws DBException, PKException, NameIsAlreadyUsedException, XMLException {
 		user.setId(this.nextId());
 
 		if (this.existsThisFname(user.getFname())) {
 			throw new NameIsAlreadyUsedException();
 		}
-
-		ManagerFactory.getInstance().getUserManager().insert(user);
 		
-		// #TODO: Se debe hacer que lo inserte también en la base de datos.
+		ManagerFactoryXML.getInstance().getUserManager().insert(user);
+		
+		try {
+			ManagerFactory.getInstance().getUserManager().insert(user);
+		} catch (Exception e) {}
+		
 	}
 	
-	public void update(User user) throws DBException {
-		ManagerFactory.getInstance().getUserManager().update(user);
+	public void update(User user) throws DBException, XMLException {
+		ManagerFactoryXML.getInstance().getUserManager().update(user);
+		
+		try {
+			ManagerFactory.getInstance().getUserManager().update(user);
+		} catch (Exception e) {}
+		
 	}
 	
 	public void delete(User user) throws XMLException{
+		ManagerFactoryXML.getInstance().getUserManager().delete(user);
+		
 		try {
 			ManagerFactory.getInstance().getUserManager().delete(user);
 		} catch (DBException ex) {}
-		ManagerFactoryXML.getInstance().getUserManager().delete(user);
 		ControllerFactory.getInstance().getUserWorkoutLineController().deleteByUserId(user.getId());
 		ControllerFactory.getInstance().getUserExerciseLineController().deleteByUserId(user.getId());
 		ControllerFactory.getInstance().getUserSerieLineController().deleteByUserId(user.getId());
 	}
+	
+	public void signUp(User user) throws DBException, NameIsAlreadyUsedException, PKException {
+		
+		boolean userExists = this.existsThisFname(user.getFname());
+		
+		if (userExists) {
+			throw new NameIsAlreadyUsedException();
+		}
+		
+		user.setId(this.nextId());
+		ManagerFactory.getInstance().getUserManager().insert(user);
+		// #TODO Llamar al proceso de backup para descargar toda la base de datos en local
+	}
+	
+	
+	
 }
