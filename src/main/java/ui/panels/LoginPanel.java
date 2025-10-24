@@ -10,8 +10,6 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import firebase.ManagerFactory;
-import firebase.exceptions.DBException;
 import ui.Window;
 
 public class LoginPanel extends JPanel {

@@ -9,19 +9,14 @@ import javax.swing.SwingConstants;
 
 import controllers.ControllerFactory;
 import controllers.exceptions.NameIsAlreadyUsedException;
-import controllers.exceptions.PKException;
 import entities.User;
-import firebase.ManagerFactory;
-import firebase.ManagerInterface;
 import firebase.exceptions.DBException;
 
 import javax.swing.JTextField;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Date;
 import java.time.LocalDateTime;
-import java.util.ResourceBundle.Control;
 
 import javax.swing.JButton;
 
@@ -139,6 +134,13 @@ public class RegisterPanel extends JPanel {
 		);
 		try {
 			ControllerFactory.getInstance().getUserController().signUp(user);
+	        JOptionPane.showMessageDialog(
+		        	this,
+		        	"Registro realizado con éxito, será redirigido...",
+		        	"Registro",
+		        	JOptionPane.INFORMATION_MESSAGE
+		        );
+	        
 			window.showPanel(Window.WORKOUT_PANEL);
 		} catch (NameIsAlreadyUsedException ex) {
 	        JOptionPane.showMessageDialog(
