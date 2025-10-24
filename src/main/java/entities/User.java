@@ -27,8 +27,8 @@ public class User {
 		this.lastMod = lastMod;
 	}
 
-	public User(int id, String fname, String lname, String pw, String email, String birth, String lastMod, int level) {
-		this.trainer = false;
+	public User(int id, String fname, String lname, String pw, String email, String birth, String lastMod, int level, boolean trainer) {
+		this.trainer = trainer;
 		this.id      = id;
 		this.level   = level;
 		this.fname   = fname;
