@@ -5,6 +5,8 @@ import java.util.List;
 import entities.UserSerieLine;
 import firebase.ManagerFactory;
 import firebase.exceptions.DBException;
+import xml.ManagerFactoryXML;
+import xml.exceptions.XMLException;
 
 public class UserSerieLineController {
 
@@ -19,7 +21,7 @@ public class UserSerieLineController {
 		return instance;
 	}
 	
-	public void deleteByUserId(int userId) {
+	public void deleteByUserId(int userId) throws XMLException{
 		List<UserSerieLine> usls = null;
 
 		try {
@@ -29,8 +31,13 @@ public class UserSerieLineController {
 					ManagerFactory.getInstance().getUserSerieLineManager().delete(usl);
 				}
 			}
-		} catch (DBException ex) {
-			// #TODO: hay que tratar de acceder a base de datos local.
+		} catch (DBException ex) {}
+		usls = ManagerFactoryXML.getInstance().getUserSerieLineManager().selectAll();
+		for (UserSerieLine usl : usls) {
+			if (usl.getUserId() == userId) {
+				ManagerFactoryXML.getInstance().getUserSerieLineManager().delete(usl);
+			}
 		}
+		
 	}
 }

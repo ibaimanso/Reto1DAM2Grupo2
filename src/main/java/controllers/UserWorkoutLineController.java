@@ -3,6 +3,8 @@ package controllers;
 import java.util.List;
 
 import entities.UserWorkoutLine;
+import xml.ManagerFactoryXML;
+import xml.exceptions.XMLException;
 import firebase.ManagerFactory;
 import firebase.exceptions.DBException;
 
@@ -19,7 +21,7 @@ public class UserWorkoutLineController {
 		return instance;
 	}
 	
-	public void deleteByUserId(int userId) {
+	public void deleteByUserId(int userId) throws XMLException{
 		List<UserWorkoutLine> uwls = null;
 
 		try {
@@ -29,8 +31,12 @@ public class UserWorkoutLineController {
 					ManagerFactory.getInstance().getUserWorkoutLineManager().delete(uwl);
 				}
 			}
-		} catch (DBException ex) {
-			// #TODO: hay que tratar de acceder a base de datos local.
+		} catch (DBException ex) {}
+		uwls = ManagerFactoryXML.getInstance().getUserWorkoutLineManager().selectAll();
+		for (UserWorkoutLine uwl : uwls) {
+			if (uwl.getUserId() == userId) {
+				ManagerFactoryXML.getInstance().getUserWorkoutLineManager().delete(uwl);
+			}
 		}
 	}
 }

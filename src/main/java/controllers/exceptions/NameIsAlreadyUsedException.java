@@ -1,4 +1,4 @@
-package controllers.exceptinos;
+package controllers.exceptions;
 
 public class NameIsAlreadyUsedException extends Exception {
 
