@@ -13,6 +13,11 @@ public class WorkoutPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	
 	private Window window = null;
+	
+	private JButton btnPerfil             = null;
+	private JButton btnSeleccionarWorkout = null;
+	private JLabel  lblWorkouts           = null;
+	private JList   list                  = null;
 
 	public WorkoutPanel(Window window) {
 		this.window = window;
@@ -20,20 +25,20 @@ public class WorkoutPanel extends JPanel {
 		this.setSize(600, 500);
 		setLayout(null);
 		
-		JButton btnPerfil = new JButton("Perfil");
+		btnPerfil = new JButton("Perfil");
 		btnPerfil.setBounds(480, 33, 89, 23);
 		add(btnPerfil);
 		
-		JLabel lblWorkouts = new JLabel("Listado de Workouts");
+		lblWorkouts = new JLabel("Listado de Workouts");
 		lblWorkouts.setHorizontalAlignment(SwingConstants.CENTER);
 		lblWorkouts.setBounds(226, 68, 120, 14);
 		add(lblWorkouts);
 		
-		JList list = new JList();
+		list = new JList();
 		list.setBounds(118, 107, 349, 263);
 		add(list);
 		
-		JButton btnSeleccionarWorkout = new JButton("Seleccionar");
+		btnSeleccionarWorkout = new JButton("Seleccionar");
 		btnSeleccionarWorkout.setBounds(299, 381, 168, 23);
 		btnSeleccionarWorkout.addActionListener(e ->
 		window.showPanel(Window.EXERCISE_PANEL)
