@@ -34,15 +34,15 @@ public class UserSerieLineManager implements ManagerInterface<UserSerieLine> {
 
 	@Override
 	public List<UserSerieLine> selectAll() throws DBException {
-		List<UserSerieLine> ret = null;
+		List<UserSerieLine> ret = new ArrayList<UserSerieLine>();
 
 		try {
 			Firestore db = ManagerFactory.getInstance().getDB();
 			ApiFuture<QuerySnapshot> query = db.collection(collectionName).get();
 			QuerySnapshot qs = query.get();
 			List<QueryDocumentSnapshot> userSerieLines = qs.getDocuments();
-			if (null == ret) ret = new ArrayList<UserSerieLine>();
 			for (QueryDocumentSnapshot userSerieLine: userSerieLines) {
+				if (userSerieLine.getLong("userId").intValue() <= 0) continue;
 				ret.add(new UserSerieLine(
 					userSerieLine.getLong("userId").intValue(),
 					userSerieLine.getLong("serieId").intValue()

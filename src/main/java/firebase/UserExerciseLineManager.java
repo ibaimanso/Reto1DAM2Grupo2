@@ -34,15 +34,15 @@ public class UserExerciseLineManager implements ManagerInterface<UserExerciseLin
 
 	@Override
 	public List<UserExerciseLine> selectAll() throws DBException {
-		List<UserExerciseLine> ret = null;
+		List<UserExerciseLine> ret = new ArrayList<UserExerciseLine>();
 
 		try {
 			Firestore db = ManagerFactory.getInstance().getDB();
 			ApiFuture<QuerySnapshot> query = db.collection(collectionName).get();
 			QuerySnapshot qs = query.get();
 			List<QueryDocumentSnapshot> userExerciseLines = qs.getDocuments();
-			if (null == ret) ret = new ArrayList<UserExerciseLine>();
 			for (QueryDocumentSnapshot userExerciseLine: userExerciseLines) {
+				if (userExerciseLine.getLong("userId").intValue() <= 0) continue;
 				ret.add(new UserExerciseLine(
 					userExerciseLine.getLong("userId").intValue(),
 					userExerciseLine.getLong("exerciseId").intValue()

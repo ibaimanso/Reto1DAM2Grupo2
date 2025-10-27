@@ -34,15 +34,15 @@ public class SerieManager implements ManagerInterface<Serie> {
 
 	@Override
 	public List<Serie> selectAll() throws DBException {
-		List<Serie> ret = null;
+		List<Serie> ret = new ArrayList<Serie>();
 
 		try {
 			Firestore db = ManagerFactory.getInstance().getDB();
 			ApiFuture<QuerySnapshot> query = db.collection(collectionName).get();
 			QuerySnapshot qs = query.get();
 			List<QueryDocumentSnapshot> series = qs.getDocuments();
-			if (null == ret) ret = new ArrayList<Serie>();
 			for (QueryDocumentSnapshot serie: series) {
+				if (serie.getLong("id").intValue() <= 0) continue;
 				ret.add(new Serie(
 					serie.getLong("id").intValue(),
 					serie.getLong("exerciseId").intValue(),

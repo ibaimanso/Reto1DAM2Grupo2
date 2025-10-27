@@ -34,15 +34,15 @@ public class UserManager implements ManagerInterface<User> {
 
 	@Override
 	public List<User> selectAll() throws DBException {
-		List<User> ret = null;
+		List<User> ret = new ArrayList<User>();
 
 		try {
 			Firestore db = ManagerFactory.getInstance().getDB();
 			ApiFuture<QuerySnapshot> query = db.collection(collectionName).get();
 			QuerySnapshot qs = query.get();
 			List<QueryDocumentSnapshot> users = qs.getDocuments();
-			if (null == ret) ret = new ArrayList<User>();
 			for (QueryDocumentSnapshot user: users) {
+				if (user.getLong("id").intValue() <= 0) continue;
 				ret.add(new User(
 					user.getLong("id").intValue(),
 					user.getString("fname"),

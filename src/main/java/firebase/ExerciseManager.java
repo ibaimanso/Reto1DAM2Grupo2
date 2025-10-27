@@ -43,6 +43,7 @@ public class ExerciseManager implements ManagerInterface<Exercise> {
 			List<QueryDocumentSnapshot> exercises = qs.getDocuments();
 			if (null == ret) ret = new ArrayList<Exercise>();
 			for (QueryDocumentSnapshot exercise: exercises) {
+				if (exercise.getLong("id").intValue() <= 0) continue;
 				ret.add(new Exercise(
 					exercise.getLong("id").intValue(),
 					exercise.getLong("workoutId").intValue(),

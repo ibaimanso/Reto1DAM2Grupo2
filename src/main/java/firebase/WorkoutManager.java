@@ -34,15 +34,15 @@ public class WorkoutManager implements ManagerInterface<Workout> {
 
 	@Override
 	public List<Workout> selectAll() throws DBException {
-		List<Workout> ret = null;
+		List<Workout> ret = new ArrayList<Workout>();
 
 		try {
 			Firestore db = ManagerFactory.getInstance().getDB();
 			ApiFuture<QuerySnapshot> query = db.collection(collectionName).get();
 			QuerySnapshot qs = query.get();
 			List<QueryDocumentSnapshot> workouts = qs.getDocuments();
-			if (null == ret) ret = new ArrayList<Workout>();
 			for (QueryDocumentSnapshot workout: workouts) {
+				if (workout.getLong("id").intValue() <= 0) continue;
 				ret.add(new Workout(
 					workout.getLong("id").intValue(),
 					workout.getString("name"),
