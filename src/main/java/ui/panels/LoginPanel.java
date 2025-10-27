@@ -12,7 +12,6 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import controllers.ControllerFactory;
-import controllers.exceptions.NameIsAlreadyUsedException;
 import entities.User;
 import ui.Window;
 
