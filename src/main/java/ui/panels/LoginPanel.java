@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -75,13 +76,27 @@ public class LoginPanel extends JPanel {
 	private void login() {
 		User user = null;
 		try {
-			user = new User(0, nameField.getText(), null, pwField.getPassword().toString(), null, null, null, false)
-			ControllerFactory.getInstance().getUserController().existLogin()
+			user = new User(0, nameField.getText(), null, new String(pwField.getPassword()), null, null, null, 0,false);
+			boolean existLogin = ControllerFactory.getInstance().getUserController().existLogin(user);
+			
+			if (!existLogin) {
+				JOptionPane.showMessageDialog(
+					this, 
+					"Usuario o contraseña incorrectos.",
+					"Error Login",
+					JOptionPane.INFORMATION_MESSAGE
+				);
+				return;
+			}
+			
+			user = ControllerFactory.getInstance().getUserController().selectByFname(user);
+			this.window.setUserLogin(user);
 		} catch (Exception ex) {
 			
 		}
 		
-		
-		window.showPanel(Window.WORKOUT_PANEL);
+		WorkoutPanel wp = (WorkoutPanel)this.window.panels[Window.WORKOUT_PANEL];
+		wp.loadWorkouts();
+		this.window.showPanel(Window.WORKOUT_PANEL);
 	}
 }
