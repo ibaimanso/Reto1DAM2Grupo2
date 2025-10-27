@@ -118,4 +118,19 @@ public class UserController {
 		return false;
 	}
 	
+	public User selectByFname(User userToFind)
+	throws DBException {
+		User user = null;
+		List<User> users = ManagerFactory.getInstance().getUserManager().selectAll();
+		
+		for (int i = 0; i < users.size(); i++) {
+			if (users.get(i).getFname().equals(userToFind.getFname())) {
+				user = users.get(i);
+				break;
+			}
+		}
+		
+		return user;
+	}
+	
 }
