@@ -3,6 +3,7 @@ package ui;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import entities.User;
 import ui.panels.*;
 
 public class Window extends JFrame {
@@ -23,6 +24,8 @@ public class Window extends JFrame {
 		new RegisterPanel(this),
 		new WorkoutPanel(this),
 	};
+	
+	private User userLogin = null;
 
 	public Window() {
 		/*
@@ -47,5 +50,13 @@ public class Window extends JFrame {
 	
 	public void start() {
 		
+	}
+	
+	public User getUserLogin() {
+		return this.userLogin;
+	}
+	
+	public void setUserLogin(User userLogin) {
+		this.userLogin = userLogin;
 	}
 }
