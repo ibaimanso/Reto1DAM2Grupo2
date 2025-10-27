@@ -96,6 +96,7 @@ public class LoginPanel extends JPanel {
 		
 		WorkoutPanel wp = (WorkoutPanel)this.window.panels[Window.WORKOUT_PANEL];
 		wp.loadWorkouts();
+		wp = (WorkoutPanel)this.window.panels[Window.WORKOUT_PANEL];
 		this.window.showPanel(Window.WORKOUT_PANEL);
 	}
 }
