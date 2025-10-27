@@ -91,7 +91,7 @@ public class LoginPanel extends JPanel {
 			user = ControllerFactory.getInstance().getUserController().selectByFname(user);
 			this.window.setUserLogin(user);
 		} catch (Exception ex) {
-			
+			return;
 		}
 		
 		WorkoutPanel wp = (WorkoutPanel)this.window.panels[Window.WORKOUT_PANEL];
