@@ -80,7 +80,6 @@ public class Workout {
 
 	@Override
 	public String toString() {
-		return "Workout [id=" + id + ", name=" + name + ", descript=" + descript + ", videoUrl="
-				+ videoUrl + ", level=" + level + "]";
+		return "Descripción: " + this.descript + " Nivel: " + this.level;
 	}
 }

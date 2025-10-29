@@ -70,6 +70,6 @@ public class Exercise {
 
 	@Override
 	public String toString() {
-		return "Exercise [id=" + id + ", workoutId=" + workoutId + ", name=" + name + ", descript=" + descript + "]";
+		return "Descripcion: " + this.descript;
 	}
 }
