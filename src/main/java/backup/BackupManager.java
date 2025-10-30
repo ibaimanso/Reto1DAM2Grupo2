@@ -208,6 +208,9 @@ public class BackupManager {
 		List<UserExerciseLine> localUserExerciseLines  = null;
 		List<UserSerieLine>    localUserSerieLines     = null;
 		
+		UserData onlineUserData = null;
+		UserData localUserData  = null;
+		
 		try {
 			onlineUserWorkoutLines  = ManagerFactory.getInstance().getUserWorkoutLineManager().selectAll();
 			onlineUserExerciseLines = ManagerFactory.getInstance().getUserExerciseLineManager().selectAll();
@@ -224,29 +227,19 @@ public class BackupManager {
 			System.exit(7);
 		}
 		
-		/*
-		try {
-			for (UserWorkoutLine uwl: localUserWorkoutLines)
-				ManagerFactory.getInstance().getUserWorkoutLineManager().delete(uwl);
-			for (UserExerciseLine uel: localUserExerciseLines)
-				ManagerFactory.getInstance().getUserExerciseLineManager().delete(uel);
-			for (UserSerieLine usl: localUserSerieLines)
-				ManagerFactory.getInstance().getUserSerieLineManager().delete(usl);
-		} catch (Exception ex) {
-			System.exit(8);
-		}
-		
-		try {
-			for (UserWorkoutLine uwl: onlineUserWorkoutLines)
-				ManagerFactory.getInstance().getUserWorkoutLineManager().insert(uwl);
-			for (UserExerciseLine uel: onlineUserExerciseLines)
-				ManagerFactory.getInstance().getUserExerciseLineManager().insert(uel);
-			for (UserSerieLine usl: onlineUserSerieLines)
-				ManagerFactory.getInstance().getUserSerieLineManager().insert(usl);
-		} catch (Exception ex) {
-			System.exit(9);
-		}
-		*/
+		onlineUserData = getUserData(
+			onlineUser,
+			onlineUserWorkoutLines,
+			onlineUserExerciseLines,
+			onlineUserSerieLines
+		);
+
+		localUserData = getUserData(
+			localUser,
+			localUserWorkoutLines,
+			localUserExerciseLines,
+			localUserSerieLines
+		);
 	}
 
 	private void makeOnlineBackup(User onlineUser) {
