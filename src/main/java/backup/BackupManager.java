@@ -267,6 +267,70 @@ public class BackupManager {
 
 	private void makeOnlineBackup(User onlineUser) {
 		User localUser = null;
+
+		List<UserWorkoutLine>  onlineUserWorkoutLines  = null;
+		List<UserExerciseLine> onlineUserExerciseLines = null;
+		List<UserSerieLine>    onlineUserSerieLines    = null;
+
+		List<UserWorkoutLine>  localUserWorkoutLines   = null;
+		List<UserExerciseLine> localUserExerciseLines  = null;
+		List<UserSerieLine>    localUserSerieLines     = null;
+		
+		UserData onlineUserData = null;
+		UserData localUserData  = null;
+		
+		try {
+			onlineUserWorkoutLines  = ManagerFactory.getInstance().getUserWorkoutLineManager().selectAll();
+			onlineUserExerciseLines = ManagerFactory.getInstance().getUserExerciseLineManager().selectAll();
+			onlineUserSerieLines    = ManagerFactory.getInstance().getUserSerieLineManager().selectAll();
+		} catch (Exception ex) {
+			System.exit(6);
+		}
+		
+		try {
+			localUserWorkoutLines  = ManagerFactoryXML.getInstance().getUserWorkoutLineManager().selectAll();
+			localUserExerciseLines = ManagerFactoryXML.getInstance().getUserExerciseLineManager().selectAll();
+			localUserSerieLines    = ManagerFactoryXML.getInstance().getUserSerieLineManager().selectAll();
+		} catch (Exception ex) {
+			System.exit(7);
+		}
+		
+		onlineUserData = getUserData(
+			onlineUser,
+			onlineUserWorkoutLines,
+			onlineUserExerciseLines,
+			onlineUserSerieLines
+		);
+
+		localUserData = getUserData(
+			localUser,
+			localUserWorkoutLines,
+			localUserExerciseLines,
+			localUserSerieLines
+		);
+		
+		try {
+			for (UserWorkoutLine uwl: onlineUserData.userWorkoutLines)
+				ManagerFactory.getInstance().getUserWorkoutLineManager().delete(uwl);
+			for (UserExerciseLine uel: onlineUserData.userExerciseLines)
+				ManagerFactory.getInstance().getUserExerciseLineManager().delete(uel);
+			for (UserSerieLine usl: onlineUserData.userSerieLines)
+				ManagerFactory.getInstance().getUserSerieLineManager().delete(usl);
+		} catch (DBException ex) {
+			System.exit(8);
+		}
+		
+		try {
+			ManagerFactory.getInstance().getUserManager().update(onlineUser);
+			for (UserWorkoutLine uwl: localUserData.userWorkoutLines)
+				ManagerFactory.getInstance().getUserWorkoutLineManager().insert(uwl);
+			for (UserExerciseLine uel: localUserData.userExerciseLines)
+				ManagerFactory.getInstance().getUserExerciseLineManager().insert(uel);
+			for (UserSerieLine usl: localUserData.userSerieLines)
+				ManagerFactory.getInstance().getUserSerieLineManager().insert(usl);
+		} catch (DBException ex) {
+			System.exit(9);
+		}
 	}
 	
 	private void makeBinaryBackup()
