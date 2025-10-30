@@ -45,8 +45,16 @@ public class ManagerFactory {
 		return ExerciseManager.getInstance();
 	}
 
-	public SerieManager getSeriesManager() {
+	public SerieManager getSerieManager() {
 		return SerieManager.getInstance();
+	}
+	
+	public SerieManager getSeriesManager() {
+		// Nos confundimos con el nombre y no lo voy
+		// a cambiar en todos los lados en donde se
+		// llama a esta función; por lo que he hecho
+		// este alias.
+		return this.getSeriesManager();
 	}
 
 	public UserExerciseLineManager getUserExerciseLineManager() {
