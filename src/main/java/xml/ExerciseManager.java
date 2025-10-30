@@ -57,7 +57,7 @@ public class ExerciseManager implements ManagerInterfaceXML<Exercise>{
 		} catch (Exception ex) {
 			throw new XMLException();
 		}
-		return null;
+		return ret;
 	}
 
 	@Override

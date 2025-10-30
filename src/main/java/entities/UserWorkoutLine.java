@@ -1,8 +1,12 @@
 package entities;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class UserWorkoutLine {
+public class UserWorkoutLine implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
 	private int    userId    = 0;
 	private int    workoutId = 0;
 	private String doneDate  = null;

@@ -134,6 +134,7 @@ public class BackupManager {
 		try {
 			this.makeBinaryBackup();
 		} catch (Exception ex) {
+			ex.printStackTrace();
 			System.exit(100);
 		}
 	}

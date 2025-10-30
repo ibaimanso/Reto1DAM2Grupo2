@@ -1,9 +1,12 @@
 package entities;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Exercise {
+public class Exercise implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
+
 	private int    id        = 0;
 	private int    workoutId = 0;
 	private String name      = null;

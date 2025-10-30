@@ -1,8 +1,12 @@
 package entities;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Serie {
+public class Serie implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
 	private int    id           = 0;
 	private int    exerciseId   = 0;
 	private int    expectedTime = 0;

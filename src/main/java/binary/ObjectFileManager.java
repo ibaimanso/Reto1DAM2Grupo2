@@ -22,6 +22,9 @@ public class ObjectFileManager<T> {
 		
 		try {
 			file = new File(filePath);
+			if (!file.exists()) {
+				file.createNewFile();
+			}
 			fos  = new FileOutputStream(file);
 			oos  = new ObjectOutputStream(fos);
 			

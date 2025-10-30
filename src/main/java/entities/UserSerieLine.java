@@ -1,8 +1,12 @@
 package entities;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class UserSerieLine {
+public class UserSerieLine implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
 	private int userId  = 0;
 	private int serieId = 0;
 	

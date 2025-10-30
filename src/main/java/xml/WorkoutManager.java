@@ -64,7 +64,7 @@ public class WorkoutManager implements ManagerInterfaceXML<Workout>{
 			throw new XMLException();
 		}
 		
-		return null;
+		return ret;
 	}
 
 	@Override
