@@ -124,8 +124,6 @@ public class WorkoutManager implements ManagerInterfaceXML<Workout>{
 			}
 		}
 		
+		ManagerFactoryXML.getInstance().saveDocument(this.filePath, doc);		
 	}
-
-	
-	
 }

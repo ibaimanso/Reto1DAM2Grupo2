@@ -78,7 +78,7 @@ public class ManagerFactoryXML {
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();
 			Transformer transformer = transformerFactory.newTransformer();
 			
-			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+			//transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 			transformer.transform(new DOMSource(doc), new StreamResult(new File(xmlPath)));
 			
 		} catch (Exception ex) {
