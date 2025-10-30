@@ -23,18 +23,10 @@ import xml.exceptions.XMLException;
 
 public class BackupManager {
 
-	private static BackupManager instance = null;
-	
 	private final String binPath = "C:/trastero/bin/bin_data.dat";
 	
-	public BackupManager() {}
-	
-	public static BackupManager getInstance() {
-		if (null == instance) {
-			instance = new BackupManager();
-		}
-		
-		return instance;
+	public BackupManager() {
+		this.tryBackup();
 	}
 	
 	private User getUserById(List<User> users, User user) {
@@ -47,9 +39,6 @@ public class BackupManager {
 	}
 	
 	public void tryBackup() {
-		
-		// TODO obtener las fechas de actualización y subir o bajar los datos en base a cual sea más reciente.
-		
 		List<User> localUsers  = null;
 		List<User> onlineUsers = null;
 		
