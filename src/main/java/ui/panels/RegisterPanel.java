@@ -135,12 +135,12 @@ public class RegisterPanel extends JPanel {
 		try {
 			ControllerFactory.getInstance().getUserController().signUp(user);
 	        JOptionPane.showMessageDialog(
-		        	this,
-		        	"Registro realizado con éxito, será redirigido...",
-		        	"Registro",
-		        	JOptionPane.INFORMATION_MESSAGE
-		        );
-	        
+				this,
+				"Registro realizado con éxito, será redirigido...",
+				"Registro",
+				JOptionPane.INFORMATION_MESSAGE
+			);
+	        window.setUserLogin(user);
 			window.showPanel(Window.WORKOUT_PANEL);
 		} catch (NameIsAlreadyUsedException ex) {
 	        JOptionPane.showMessageDialog(
