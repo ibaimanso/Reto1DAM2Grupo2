@@ -65,7 +65,7 @@ public class ExerciseManager implements ManagerInterface<Exercise> {
 
 		Map<String, Object> exerciseMap = new HashMap<>();
 		exerciseMap.put("id",        t.getId());
-		exerciseMap.put("forkoutId", t.getWorkoutId());
+		exerciseMap.put("workoutId", t.getWorkoutId());
 		exerciseMap.put("name",      t.getName());
 		exerciseMap.put("descript",  t.getDescript());
 
@@ -80,7 +80,7 @@ public class ExerciseManager implements ManagerInterface<Exercise> {
 
 		Map<String, Object> exerciseMap = new HashMap<>();
 		exerciseMap.put("id",        t.getId());
-		exerciseMap.put("forkoutId", t.getWorkoutId());
+		exerciseMap.put("workoutId", t.getWorkoutId());
 		exerciseMap.put("name",      t.getName());
 		exerciseMap.put("descript",  t.getDescript());
 
