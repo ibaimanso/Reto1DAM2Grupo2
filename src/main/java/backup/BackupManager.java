@@ -156,6 +156,30 @@ public class BackupManager {
 		
 		return ret;
 	}
+
+	private List<UserExerciseLine> getUserExerciseLinesByUser(User user, List<UserExerciseLine> uels) {
+		List<UserExerciseLine> ret = new ArrayList<UserExerciseLine>();
+
+		for (UserExerciseLine uel: uels) {
+			if (uel.getUserId() == user.getId()) {
+				ret.add(uel);
+			}
+		}
+		
+		return ret;
+	}
+
+	private List<UserSerieLine> getUserSerieLinesByUser(User user, List<UserSerieLine> usls) {
+		List<UserSerieLine> ret = new ArrayList<UserSerieLine>();
+
+		for (UserSerieLine usl: usls) {
+			if (usl.getUserId() == user.getId()) {
+				ret.add(usl);
+			}
+		}
+		
+		return ret;
+	}
 	
 	private UserData getUserData(
 		User user,
@@ -166,9 +190,11 @@ public class BackupManager {
 		UserData userData = new UserData();
 		
 		userData.user = user;
-		userData.userWorkoutLines = getUserWorkoutLinesByUser(user, userWorkoutLines);
+		userData.userWorkoutLines  = getUserWorkoutLinesByUser(user, userWorkoutLines);
+		userData.userExerciseLines = getUserExerciseLinesByUser(user, userExerciseLines);
+		userData.userSerieLines    = getUserSerieLinesByUser(user, userSerieLines);
 		
-		return null;
+		return userData;
 	}
 	
 	private void makeLocalBackup(User localUser) {
