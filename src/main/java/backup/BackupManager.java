@@ -241,7 +241,6 @@ public class BackupManager {
 			localUserSerieLines
 		);
 		
-		
 		try {
 			for (UserWorkoutLine uwl: localUserData.userWorkoutLines)
 				ManagerFactoryXML.getInstance().getUserWorkoutLineManager().delete(uwl);
@@ -252,7 +251,18 @@ public class BackupManager {
 		} catch (XMLException ex) {
 			System.exit(8);
 		}
-		ManagerFactoryXML.getInstance().getUserManager().update(onlineUser);
+		
+		try {
+			ManagerFactoryXML.getInstance().getUserManager().update(onlineUser);
+			for (UserWorkoutLine uwl: onlineUserData.userWorkoutLines)
+				ManagerFactoryXML.getInstance().getUserWorkoutLineManager().insert(uwl);
+			for (UserExerciseLine uel: onlineUserData.userExerciseLines)
+				ManagerFactoryXML.getInstance().getUserExerciseLineManager().insert(uel);
+			for (UserSerieLine usl: onlineUserData.userSerieLines)
+				ManagerFactoryXML.getInstance().getUserSerieLineManager().insert(usl);
+		} catch (XMLException ex) {
+			System.exit(9);
+		}
 	}
 
 	private void makeOnlineBackup(User onlineUser) {
