@@ -2,6 +2,7 @@ package backup;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.threeten.bp.LocalDateTime;
@@ -144,7 +145,19 @@ public class BackupManager {
 		}
 	}
 	
-	private UserData getUserWorkoutLinesByUserId(
+	private List<UserWorkoutLine> getUserWorkoutLinesByUser(User user, List<UserWorkoutLine> uwls) {
+		List<UserWorkoutLine> ret = new ArrayList<UserWorkoutLine>();
+
+		for (UserWorkoutLine uwl: uwls) {
+			if (uwl.getUserId() == user.getId()) {
+				ret.add(uwl);
+			}
+		}
+		
+		return ret;
+	}
+	
+	private UserData getUserData(
 		User user,
 		List<UserWorkoutLine> userWorkoutLines,
 		List<UserExerciseLine> userExerciseLines,
@@ -152,6 +165,8 @@ public class BackupManager {
 	) {
 		UserData userData = new UserData();
 		
+		userData.user = user;
+		userData.userWorkoutLines = getUserWorkoutLinesByUser(user, userWorkoutLines);
 		
 		return null;
 	}
