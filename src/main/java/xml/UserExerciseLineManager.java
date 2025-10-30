@@ -110,8 +110,8 @@ public class UserExerciseLineManager implements ManagerInterfaceXML<UserExercise
 			Element userExerciseLine = (Element) users.item(i);
 			
 			if (
-				Integer.parseInt(userExerciseLine.getAttribute("userId")) != t.getUserId() &&
-				Integer.parseInt(userExerciseLine.getAttribute("exerciseId")) != t.getExerciseId()
+				Integer.parseInt(userExerciseLine.getAttribute("userId")) == t.getUserId() &&
+				Integer.parseInt(userExerciseLine.getAttribute("exerciseId")) == t.getExerciseId()
 			) {
 				userExerciseLine.getParentNode().removeChild(userExerciseLine);
 				break;

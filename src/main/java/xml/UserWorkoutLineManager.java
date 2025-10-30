@@ -114,8 +114,8 @@ public class UserWorkoutLineManager implements ManagerInterfaceXML<UserWorkoutLi
 			Element userSerieLine = (Element) users.item(i);
 			
 			if (
-				Integer.parseInt(userSerieLine.getAttribute("userId")) != t.getUserId() &&
-				Integer.parseInt(userSerieLine.getAttribute("workoutId")) != t.getWorkoutId()
+				Integer.parseInt(userSerieLine.getAttribute("userId")) == t.getUserId() &&
+				Integer.parseInt(userSerieLine.getAttribute("workoutId")) == t.getWorkoutId()
 			) {
 				userSerieLine.getParentNode().removeChild(userSerieLine);
 				break;

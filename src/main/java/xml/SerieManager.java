@@ -121,7 +121,7 @@ public class SerieManager implements ManagerInterfaceXML<Serie>{
 		for (int i = 0; i < series.getLength(); i++) {
 			Element serie = (Element) series.item(i);
 			
-			if (Integer.parseInt(serie.getAttribute("id")) != t.getId()) {
+			if (Integer.parseInt(serie.getAttribute("id")) == t.getId()) {
 				serie.getParentNode().removeChild(serie);
 				break;
 			}

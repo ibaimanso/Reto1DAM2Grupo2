@@ -111,8 +111,8 @@ public class UserSerieLineManager implements ManagerInterfaceXML<UserSerieLine>{
 			Element userSerieLine = (Element) users.item(i);
 			
 			if (
-				Integer.parseInt(userSerieLine.getAttribute("userId")) != t.getUserId() &&
-				Integer.parseInt(userSerieLine.getAttribute("serieId")) != t.getSerieId()
+				Integer.parseInt(userSerieLine.getAttribute("userId")) == t.getUserId() &&
+				Integer.parseInt(userSerieLine.getAttribute("serieId")) == t.getSerieId()
 			) {
 				userSerieLine.getParentNode().removeChild(userSerieLine);
 				break;

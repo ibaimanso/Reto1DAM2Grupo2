@@ -118,7 +118,7 @@ public class WorkoutManager implements ManagerInterfaceXML<Workout>{
 		for (int i = 0; i < workouts.getLength(); i++) {
 			Element workout = (Element) workouts.item(i);
 			
-			if (Integer.parseInt(workout.getAttribute("id")) != t.getId()) {
+			if (Integer.parseInt(workout.getAttribute("id")) == t.getId()) {
 				workout.getParentNode().removeChild(workout);
 				break;
 			}

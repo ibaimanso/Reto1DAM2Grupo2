@@ -84,6 +84,7 @@ public class UserManager implements ManagerInterfaceXML<User> {
 			userElement.setAttribute("email", t.getEmail());
 			userElement.setAttribute("birth", t.getBirth());
 			userElement.setAttribute("level", String.valueOf(t.getId()));
+			userElement.setAttribute("lastMod", t.getLastMod());
 			
 			root.appendChild(userElement);
 			
@@ -113,6 +114,7 @@ public class UserManager implements ManagerInterfaceXML<User> {
 			user.setAttribute("email", t.getEmail());
 			user.setAttribute("birth", t.getBirth());
 			user.setAttribute("level", String.valueOf(t.getId()));
+			user.setAttribute("lastMod", t.getLastMod());
 			break;
 		}
 		ManagerFactoryXML.getInstance().saveDocument(this.filePath, doc);
@@ -126,7 +128,7 @@ public class UserManager implements ManagerInterfaceXML<User> {
 		for (int i = 0; i < users.getLength(); i++) {
 			Element user = (Element) users.item(i);
 			
-			if (Integer.parseInt(user.getAttribute("id")) != t.getId()) {
+			if (Integer.parseInt(user.getAttribute("id")) == t.getId()) {
 				user.getParentNode().removeChild(user);
 				break;
 			}
