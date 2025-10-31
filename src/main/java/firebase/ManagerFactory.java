@@ -49,12 +49,13 @@ public class ManagerFactory {
 		return SerieManager.getInstance();
 	}
 	
+	@Deprecated
 	public SerieManager getSeriesManager() {
 		// Nos confundimos con el nombre y no lo voy
 		// a cambiar en todos los lados en donde se
 		// llama a esta función; por lo que he hecho
 		// este alias.
-		return this.getSeriesManager();
+		return this.getSerieManager();
 	}
 
 	public UserExerciseLineManager getUserExerciseLineManager() {
