@@ -19,7 +19,7 @@ public class MainProyect {
 		Process process = null;
 
 		try {
-			processBuilder = new ProcessBuilder("java", "-cp", "target/classes", "backup.BackupManager");
+			processBuilder = new ProcessBuilder(System.getProperty("java.home") + "/bin/java", "-cp", System.getProperty("java.class.path"), "backup.BackupManager");
 			processBuilder.redirectErrorStream(true);
 			process = processBuilder.start();
 
