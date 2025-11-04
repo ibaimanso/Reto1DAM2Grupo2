@@ -59,4 +59,8 @@ public class Window extends JFrame {
 	public void setUserLogin(User userLogin) {
 		this.userLogin = userLogin;
 	}
+
+	public ExercisePanel getExercisePanel() {
+		return (ExercisePanel) this.panels[Window.EXERCISE_PANEL];
+	}
 }

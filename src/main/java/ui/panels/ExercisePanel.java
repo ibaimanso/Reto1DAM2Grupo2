@@ -19,6 +19,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Collections;
+
+import entities.Exercise;
+import entities.Serie;
+import entities.Workout;
 
 public class ExercisePanel extends JPanel {
 
@@ -48,6 +55,12 @@ public class ExercisePanel extends JPanel {
 	private boolean inRest = false;
 	private int completedSeries = 0;
 
+	// Datos de workout y ejercicios
+	private Workout workout = null;
+	private List<Exercise> exercises = new ArrayList<>();
+	private Map<Integer, List<SeriesData>> seriesByExerciseId = new HashMap<>();
+	private int currentExerciseIndex = -1;
+
 	// Informacion de prueba que se cambiara por la informacion recogida de firebase Firebase
 	public static class SeriesData {
 		public String name = null;
@@ -65,6 +78,7 @@ public class ExercisePanel extends JPanel {
 		}
 	}
 
+	
 	public ExercisePanel(Window window) {
 		this.window = window;
 		//this.setVisible(true);
@@ -172,7 +186,12 @@ public class ExercisePanel extends JPanel {
 						btnStartPauseNext.setText("Start");
 						btnStartPauseNext.setBackground(Color.GREEN);
 					} else if (state == State.COMPLETED) {
-						resetForNextExercise();
+						// Pasar al siguiente ejercicio si existe, si no salir con resumen
+						if (currentExerciseIndex + 1 < exercises.size()) {
+							showExercise(currentExerciseIndex + 1);
+						} else {
+							showSummaryAndExit();
+						}
 					}
 				}
 			}
@@ -185,8 +204,53 @@ public class ExercisePanel extends JPanel {
 			}
 		});
 
-		// Aquí se le llamaría a la información real de la base de datos de firebase
-		loadSampleData();
+		// Eliminamos datos de ejemplo; los datos reales llegan con setWorkoutData()
+		// loadSampleData();
+	}
+
+	// Establecer datos del workout completo y sus ejercicios/series
+	public void setWorkoutData(Workout workout, List<Exercise> exercises, Map<Integer, List<Serie>> seriesByExercise) {
+		this.workout = workout;
+		this.exercises = new ArrayList<>();
+		if (exercises != null) this.exercises.addAll(exercises);
+		this.seriesByExerciseId.clear();
+		if (seriesByExercise != null) {
+			for (Map.Entry<Integer, List<Serie>> entry : seriesByExercise.entrySet()) {
+				List<SeriesData> converted = new ArrayList<>();
+				for (Serie s : entry.getValue()) {
+					ImageIcon icon = null;
+					// Si hay ruta de icono, intentar cargarla
+					try {
+						if (s.getIconPath() != null && !s.getIconPath().isEmpty()) {
+							icon = new ImageIcon(s.getIconPath());
+						}
+					} catch (Exception ignore) {}
+					converted.add(new SeriesData(
+						s.getName(),
+						s.getRepetitions(),
+						s.getExpectedTime(),
+						s.getRestTime(),
+						icon
+					));
+				}
+				this.seriesByExerciseId.put(entry.getKey(), converted);
+			}
+		}
+		// Mostrar el primer ejercicio si existe
+		if (this.exercises.size() > 0) {
+			showExercise(0);
+		} else {
+			// Sin ejercicios
+			setExerciseData(workout != null ? workout.getName() : "-", "-", "-", Collections.emptyList());
+		}
+	}
+
+	private void showExercise(int index) {
+		if (index < 0 || index >= exercises.size()) return;
+		this.currentExerciseIndex = index;
+		Exercise ex = exercises.get(index);
+		List<SeriesData> data = seriesByExerciseId.getOrDefault(ex.getId(), Collections.emptyList());
+		setExerciseData(workout != null ? workout.getName() : "-", ex.getName(), ex.getDescript(), data);
 	}
 
 	private void startSeries(int index) {
