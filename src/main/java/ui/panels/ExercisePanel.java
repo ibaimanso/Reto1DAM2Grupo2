@@ -310,14 +310,34 @@ public class ExercisePanel extends JPanel {
 			completedSeries, series.size(), formatHMS(total), percent, motivationalMessage(percent));
 		JOptionPane.showMessageDialog(this, msg, "Workout summary", JOptionPane.INFORMATION_MESSAGE);
 		
+		
 		// Registrar el workout completado si se finalizó al menos el 50%
 		if (percent >= 50 && workout != null && window.getUserLogin() != null) {
 			try {
 				java.time.LocalDateTime now = java.time.LocalDateTime.now();
 				String doneDate = now.toString();
+				
+				// Registrar el workout con el tiempo total
 				controllers.ControllerFactory.getInstance()
 					.getUserWorkoutLineController()
-					.registerWorkoutCompletion(window.getUserLogin(), workout, doneDate);
+					.registerWorkoutCompletion(window.getUserLogin(), workout, doneDate, totalSeconds);
+				
+				// Registrar TODOS los ejercicios del workout como completados
+				// (asumimos que si completó el 50% del workout, completó todos los ejercicios)
+				for (entities.Exercise exercise : exercises) {
+					entities.UserExerciseLine uel = new entities.UserExerciseLine(
+						window.getUserLogin().getId(),
+						exercise.getId()
+					);
+					try {
+						firebase.ManagerFactory.getInstance()
+							.getUserExerciseLineManager()
+							.insert(uel);
+					} catch (Exception insertEx) {
+						// Si ya existe, no es un error - continuar con el siguiente
+					}
+				}
+				
 			} catch (Exception ex) {
 				// No mostrar error al usuario, solo log
 				System.err.println("Error al registrar workout completado: " + ex.getMessage());

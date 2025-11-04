@@ -46,6 +46,8 @@ public class Window extends JFrame {
 		this.setContentPane(this.panels[panelToShow]);
 		this.setSize(600, 500);
 		this.setResizable(false);
+		this.revalidate();
+        this.repaint();
 	}
 	
 	public void start() {

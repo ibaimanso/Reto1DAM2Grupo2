@@ -35,10 +35,19 @@ public class UserWorkoutLineManager implements ManagerInterfaceXML<UserWorkoutLi
 	}
 	
 	private UserWorkoutLine fromElementToEntity(Element entityElement) {
+		int totalTime = 0;
+		if (entityElement.hasAttribute("totalTime")) {
+			try {
+				totalTime = Integer.parseInt(entityElement.getAttribute("totalTime"));
+			} catch (NumberFormatException e) {
+				totalTime = 0;
+			}
+		}
 		return new UserWorkoutLine(
 			Integer.parseInt(entityElement.getAttribute("userId")),
 			Integer.parseInt(entityElement.getAttribute("workoutId")),
-			entityElement.getAttribute("doneDate")
+			entityElement.getAttribute("doneDate"),
+			totalTime
 		);
 	}
 	
@@ -89,6 +98,7 @@ public class UserWorkoutLineManager implements ManagerInterfaceXML<UserWorkoutLi
 			userWorkoutLineElement.setAttribute("userId", String.valueOf(t.getUserId()));
 			userWorkoutLineElement.setAttribute("workoutId", String.valueOf(t.getWorkoutId()));
 			userWorkoutLineElement.setAttribute("doneDate", t.getDoneDate());
+			userWorkoutLineElement.setAttribute("totalTime", String.valueOf(t.getTotalTime()));
 			
 			root.appendChild(userWorkoutLineElement);
 			

@@ -46,8 +46,8 @@ public class UserWorkoutLineController {
 	/**
 	 * Registra que un usuario ha completado un workout
 	 */
-	public void registerWorkoutCompletion(User user, Workout workout, String doneDate) throws DBException {
-		UserWorkoutLine uwl = new UserWorkoutLine(user.getId(), workout.getId(), doneDate);
+	public void registerWorkoutCompletion(User user, Workout workout, String doneDate, int totalTimeSeconds) throws DBException {
+		UserWorkoutLine uwl = new UserWorkoutLine(user.getId(), workout.getId(), doneDate, totalTimeSeconds);
 		ManagerFactory.getInstance().getUserWorkoutLineManager().insert(uwl);
 	}
 	

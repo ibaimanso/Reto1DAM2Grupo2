@@ -43,10 +43,15 @@ public class UserWorkoutLineManager implements ManagerInterface<UserWorkoutLine>
 			List<QueryDocumentSnapshot> userWorkoutLines = qs.getDocuments();
 			for (QueryDocumentSnapshot userWorkoutLine: userWorkoutLines) {
 				if (userWorkoutLine.getLong("userId").intValue() <= 0) continue;
+				int totalTime = 0;
+				if (userWorkoutLine.contains("totalTime") && userWorkoutLine.getLong("totalTime") != null) {
+					totalTime = userWorkoutLine.getLong("totalTime").intValue();
+				}
 				ret.add(new UserWorkoutLine(
 					userWorkoutLine.getLong("userId").intValue(),
 					userWorkoutLine.getLong("workoutId").intValue(),
-					userWorkoutLine.getString("doneDate")
+					userWorkoutLine.getString("doneDate"),
+					totalTime
 				));
 			}
 		} catch (Exception ex) {
@@ -65,6 +70,7 @@ public class UserWorkoutLineManager implements ManagerInterface<UserWorkoutLine>
 		workoutMap.put("userId",       t.getUserId());
 		workoutMap.put("workoutId",    t.getWorkoutId());
 		workoutMap.put("doneDate",     t.getDoneDate());
+		workoutMap.put("totalTime",    t.getTotalTime());
 
 		DocumentReference dr = query.document(String.format("%dx%d", t.getUserId(), t.getWorkoutId()));
 		dr.set(workoutMap);
@@ -79,6 +85,7 @@ public class UserWorkoutLineManager implements ManagerInterface<UserWorkoutLine>
 		userWorkoutLineMap.put("userId",    t.getUserId());
 		userWorkoutLineMap.put("workoutId", t.getWorkoutId());
 		userWorkoutLineMap.put("doneDate",  t.getDoneDate());
+		userWorkoutLineMap.put("totalTime", t.getTotalTime());
 
 		dr.update(userWorkoutLineMap);
 	}
