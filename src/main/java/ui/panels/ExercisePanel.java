@@ -219,7 +219,6 @@ public class ExercisePanel extends JPanel {
 				List<SeriesData> converted = new ArrayList<>();
 				for (Serie s : entry.getValue()) {
 					ImageIcon icon = null;
-					// Si hay ruta de icono, intentar cargarla
 					try {
 						if (s.getIconPath() != null && !s.getIconPath().isEmpty()) {
 							icon = new ImageIcon(s.getIconPath());
@@ -310,6 +309,21 @@ public class ExercisePanel extends JPanel {
 		String msg = String.format("Exercises done: %d/%d\nTotal time: %s\nCompleted: %.0f%%\n\n%s",
 			completedSeries, series.size(), formatHMS(total), percent, motivationalMessage(percent));
 		JOptionPane.showMessageDialog(this, msg, "Workout summary", JOptionPane.INFORMATION_MESSAGE);
+		
+		// Registrar el workout completado si se finalizó al menos el 50%
+		if (percent >= 50 && workout != null && window.getUserLogin() != null) {
+			try {
+				java.time.LocalDateTime now = java.time.LocalDateTime.now();
+				String doneDate = now.toString();
+				controllers.ControllerFactory.getInstance()
+					.getUserWorkoutLineController()
+					.registerWorkoutCompletion(window.getUserLogin(), workout, doneDate);
+			} catch (Exception ex) {
+				// No mostrar error al usuario, solo log
+				System.err.println("Error al registrar workout completado: " + ex.getMessage());
+			}
+		}
+		
 		window.showPanel(Window.WORKOUT_PANEL);
 	}
 
@@ -319,6 +333,9 @@ public class ExercisePanel extends JPanel {
 		return "Vamos, vamos!";
 	}
 
+	
+	// Para hacerlo mas visible, no es nada de logica
+	
 	private void highlightCurrentSeries() {
 		for (int i = 0; i < seriesListPanel.getComponentCount(); i++) {
 			java.awt.Component comp = seriesListPanel.getComponent(i);
@@ -339,7 +356,7 @@ public class ExercisePanel extends JPanel {
 		seriesListPanel.repaint();
 	}
 
-	// Método para establecer los datos del ejercicio desde fuera
+	// Metodo que se uso para pruebas
 	
 	public void setExerciseData(String workoutName, String exerciseName, String description, List<SeriesData> seriesData) {
 		lblWorkoutName.setText("Workout: " + (workoutName == null ? "-" : workoutName));

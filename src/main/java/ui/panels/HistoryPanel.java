@@ -8,6 +8,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import java.awt.BorderLayout;
@@ -15,6 +16,8 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+
+import controllers.ControllerFactory;
 
 public class HistoryPanel extends JPanel {
 
@@ -76,6 +79,40 @@ public class HistoryPanel extends JPanel {
 
 		this.setPreferredSize(new Dimension(600, 500));
 		this.setVisible(true);
+	}
+
+	/**
+	 * Carga el historial de workouts del usuario actual
+	 */
+	public void loadHistory() {
+		this.listModel.clear();
+		
+		if (window == null || window.getUserLogin() == null) {
+			this.listModel.addElement("No hay usuario logueado");
+			return;
+		}
+		
+		try {
+			List<String> history = ControllerFactory.getInstance()
+				.getHistoryController()
+				.getFormattedHistory(window.getUserLogin());
+			
+			if (history == null || history.isEmpty()) {
+				this.listModel.addElement("No hay workouts completados aún");
+			} else {
+				for (String item : history) {
+					this.listModel.addElement(item);
+				}
+			}
+		} catch (Exception ex) {
+			this.listModel.addElement("Error al cargar historial: " + ex.getMessage());
+			JOptionPane.showMessageDialog(
+				this,
+				"No se ha podido cargar el historial",
+				"Error",
+				JOptionPane.ERROR_MESSAGE
+			);
+		}
 	}
 
 	

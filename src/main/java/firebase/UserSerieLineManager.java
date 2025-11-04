@@ -61,8 +61,8 @@ public class UserSerieLineManager implements ManagerInterface<UserSerieLine> {
 		CollectionReference query = db.collection(this.collectionName);
 
 		Map<String, Object> userSerieLineMap = new HashMap<>();
-		userSerieLineMap.put("userId",       t.getUserId());
-		userSerieLineMap.put("userId",       t.getUserId());
+		userSerieLineMap.put("userId",  t.getUserId());
+		userSerieLineMap.put("serieId", t.getSerieId());
 
 		DocumentReference dr = query.document(String.format("%dx%d", t.getUserId(), t.getSerieId()));
 		dr.set(userSerieLineMap);
@@ -74,8 +74,8 @@ public class UserSerieLineManager implements ManagerInterface<UserSerieLine> {
 		DocumentReference dr = db.collection(collectionName).document(String.format("%dx%d", t.getUserId(), t.getSerieId()));
 
 		Map<String, Object> userSerieLineMap = new HashMap<>();
-		userSerieLineMap.put("userId",       t.getUserId());
-		userSerieLineMap.put("userId",       t.getUserId());
+		userSerieLineMap.put("userId",  t.getUserId());
+		userSerieLineMap.put("serieId", t.getSerieId());
 
 		dr.update(userSerieLineMap);
 	}

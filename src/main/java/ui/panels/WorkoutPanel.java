@@ -32,6 +32,7 @@ public class WorkoutPanel extends JPanel {
     
     private JButton         btnPerfil             = null;
     private JButton         btnSeleccionarWorkout = null;
+    private JButton         btnHistorial          = null;
     private JLabel          lblWorkouts           = null;
     private JLabel          lblExercises          = null;
     private JList<Workout>  workoutList           = null;
@@ -49,6 +50,14 @@ public class WorkoutPanel extends JPanel {
         btnPerfil = new JButton("Perfil");
         btnPerfil.setBounds(480, 33, 89, 23);
         add(btnPerfil);
+        
+        btnHistorial = new JButton("Historial");
+        btnHistorial.setBounds(370, 33, 100, 23);
+        btnHistorial.addActionListener(e -> {
+            window.getHistoryPanel().loadHistory();
+            window.showPanel(Window.HISTORY_PANEL);
+        });
+        add(btnHistorial);
         
         lblWorkouts = new JLabel("Listado de Workouts");
         lblWorkouts.setHorizontalAlignment(SwingConstants.CENTER);
@@ -139,6 +148,9 @@ public class WorkoutPanel extends JPanel {
     }
     
     public void loadWorkouts() {
+        // Limpiar modelos antes de cargar
+        workoutListModel.clear();
+        exerciseListModel.clear();
         
         try {
             List<Workout> workouts = ControllerFactory.getInstance().getWorkoutController().getWorkoutsByLevel(this.window.getUserLogin());
@@ -148,8 +160,14 @@ public class WorkoutPanel extends JPanel {
             }
             
             workoutList.setModel(workoutListModel);
+            exerciseList.setModel(exerciseListModel);
         } catch (Exception ex) {
-            // TODO: handle exception
+            JOptionPane.showMessageDialog(
+                this, 
+                "No se han podido cargar los workouts: " + ex.getMessage(),
+                "Error de carga",
+                JOptionPane.ERROR_MESSAGE
+            );
         }
     }
 }

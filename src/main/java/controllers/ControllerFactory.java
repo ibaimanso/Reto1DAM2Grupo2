@@ -17,6 +17,10 @@ public class ControllerFactory {
 		return ExerciseController.getInstance();
 	}
 	
+	public HistoryController getHistoryController() {
+		return HistoryController.getInstance();
+	}
+	
 	public SerieController getSerieController() {
 		return SerieController.getInstance();
 	}

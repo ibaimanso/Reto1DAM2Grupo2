@@ -63,4 +63,12 @@ public class Window extends JFrame {
 	public ExercisePanel getExercisePanel() {
 		return (ExercisePanel) this.panels[Window.EXERCISE_PANEL];
 	}
+	
+	public HistoryPanel getHistoryPanel() {
+		return (HistoryPanel) this.panels[Window.HISTORY_PANEL];
+	}
+	
+	public WorkoutPanel getWorkoutPanel() {
+		return (WorkoutPanel) this.panels[Window.WORKOUT_PANEL];
+	}
 }

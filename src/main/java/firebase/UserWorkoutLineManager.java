@@ -22,7 +22,7 @@ public class UserWorkoutLineManager implements ManagerInterface<UserWorkoutLine>
 	private String collectionName = null;
 	
 	public UserWorkoutLineManager() {
-		this.collectionName = "userWorkoutLine";
+		this.collectionName = "userWorkoutLines";
 	}
 	
 	public static UserWorkoutLineManager getInstance() {
