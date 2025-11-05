@@ -334,12 +334,10 @@ public class ExercisePanel extends JPanel {
 							.getUserExerciseLineManager()
 							.insert(uel);
 					} catch (Exception insertEx) {
-						// Si ya existe, no es un error - continuar con el siguiente
 					}
 				}
 				
 			} catch (Exception ex) {
-				// No mostrar error al usuario, solo log
 				System.err.println("Error al registrar workout completado: " + ex.getMessage());
 			}
 		}

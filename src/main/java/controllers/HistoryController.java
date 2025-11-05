@@ -24,14 +24,12 @@ public class HistoryController {
 		return instance;
 	}
 	
-	/**
-	 * Obtiene el historial de workouts completados por el usuario
-	 * Retorna una lista de strings formateados con la información
-	 */
+	
 	public List<String> getFormattedHistory(User user) throws DBException {
 		List<String> history = new ArrayList<>();
 		
 		// Obtener los workouts completados por el usuario
+		
 		List<UserWorkoutLine> userWorkouts = ControllerFactory.getInstance()
 			.getUserWorkoutLineController()
 			.getWorkoutsByUser(user);
@@ -50,7 +48,6 @@ public class HistoryController {
 		for (UserWorkoutLine uwl : userWorkouts) {
 			Workout workout = findWorkoutById(allWorkouts, uwl.getWorkoutId());
 			if (workout != null) {
-				// Calcular porcentaje de completitud
 				int completionPercentage = calculateCompletionPercentage(
 					workout.getId(), 
 					user.getId(), 
