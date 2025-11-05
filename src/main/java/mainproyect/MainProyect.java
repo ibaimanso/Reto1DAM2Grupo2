@@ -11,8 +11,6 @@ public class MainProyect {
 	public static void main(String[] args) {
 		tryBackup();
 		new Window().start();
-		tryBackup();
-
 	}
 	
 	private static void tryBackup() {

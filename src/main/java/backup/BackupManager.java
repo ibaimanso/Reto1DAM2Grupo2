@@ -193,6 +193,13 @@ public class BackupManager {
 	
 	private void makeLocalBackup(User onlineUser) {
 		User localUser = null;
+		
+		try {
+			localUser = getUserById(
+				ManagerFactoryXML.getInstance().getUserManager().selectAll(),
+				onlineUser
+			);
+		} catch (XMLException ex) {}
 
 		List<UserWorkoutLine>  onlineUserWorkoutLines  = null;
 		List<UserExerciseLine> onlineUserExerciseLines = null;
@@ -228,21 +235,25 @@ public class BackupManager {
 			onlineUserSerieLines
 		);
 
-		localUserData = getUserData(
-			localUser,
-			localUserWorkoutLines,
-			localUserExerciseLines,
-			localUserSerieLines
-		);
+		if (null != localUser) {
+			localUserData = getUserData(
+				localUser,
+				localUserWorkoutLines,
+				localUserExerciseLines,
+				localUserSerieLines
+			);
+		}
 		
 		try {
-			ManagerFactoryXML.getInstance().getUserManager().delete(onlineUser);
-			for (UserWorkoutLine uwl: localUserData.userWorkoutLines)
-				ManagerFactoryXML.getInstance().getUserWorkoutLineManager().delete(uwl);
-			for (UserExerciseLine uel: localUserData.userExerciseLines)
-				ManagerFactoryXML.getInstance().getUserExerciseLineManager().delete(uel);
-			for (UserSerieLine usl: localUserData.userSerieLines)
-				ManagerFactoryXML.getInstance().getUserSerieLineManager().delete(usl);
+			if (null != localUser) {
+				ManagerFactoryXML.getInstance().getUserManager().delete(onlineUser);
+				for (UserWorkoutLine uwl: localUserData.userWorkoutLines)
+					ManagerFactoryXML.getInstance().getUserWorkoutLineManager().delete(uwl);
+				for (UserExerciseLine uel: localUserData.userExerciseLines)
+					ManagerFactoryXML.getInstance().getUserExerciseLineManager().delete(uel);
+				for (UserSerieLine usl: localUserData.userSerieLines)
+					ManagerFactoryXML.getInstance().getUserSerieLineManager().delete(usl);
+			}
 		} catch (XMLException ex) {
 			System.exit(8);
 		}
