@@ -83,6 +83,6 @@ public class Workout implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Descripción: " + this.descript + " Nivel: " + this.level;
+		return "Nivel: " + this.level + " | Descripción: " + this.descript;
 	}
 }

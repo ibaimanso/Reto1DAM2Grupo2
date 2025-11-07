@@ -28,7 +28,6 @@ public class HistoryPanel extends JPanel {
 	private DefaultListModel<String> listModel   = null;
 	private JList<String>            historyList = null;
 	
-	private JButton profileButton = null;
 	private JButton backButton    = null;
 	private JPanel  topBar        = null;
 	private JLabel  title         = null;
@@ -42,17 +41,6 @@ public class HistoryPanel extends JPanel {
 		this.setLayout(new BorderLayout());
 
 		topBar = new JPanel(new BorderLayout());
-		profileButton = new JButton("Perfil");
-		profileButton.setPreferredSize(new Dimension(100, 30));
-		profileButton.addActionListener(new ActionListener() {
-
-			public void actionPerformed(ActionEvent e) {
-				if (window != null) {
-					window.showPanel(Window.LOGIN_PANEL);
-				}
-			}
-		});
-		topBar.add(profileButton, BorderLayout.WEST);
 
 		backButton = new JButton("Volver");
 		backButton.setPreferredSize(new Dimension(100, 30));

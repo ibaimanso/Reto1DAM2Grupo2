@@ -1,5 +1,6 @@
 package backup;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -342,6 +343,18 @@ public class BackupManager {
 	
 	private void makeBinaryBackup()
 	throws XMLException, FileNotFoundException, IOException {
+		
+		String path = "C:/trastero/bin/";
+		
+		try {
+            File file = new File(path);
+            if (!file.exists()) {
+            	file.mkdirs(); 
+            }
+		} catch (Exception ex) {
+			System.exit(200);
+		}
+		
 		BinData bd = new BinData();
 
 		bd.setExercises(ManagerFactoryXML.getInstance().getExerciseManager().selectAll());

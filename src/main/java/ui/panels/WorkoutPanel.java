@@ -47,12 +47,9 @@ public class WorkoutPanel extends JPanel {
         this.setSize(600, 500);
         setLayout(null);
         
-        btnPerfil = new JButton("Perfil");
-        btnPerfil.setBounds(480, 33, 89, 23);
-        add(btnPerfil);
         
         btnHistorial = new JButton("Historial");
-        btnHistorial.setBounds(370, 33, 100, 23);
+        btnHistorial.setBounds(480, 33, 100, 23);
         btnHistorial.addActionListener(e -> {
             window.getHistoryPanel().loadHistory();
             window.showPanel(Window.HISTORY_PANEL);
@@ -85,7 +82,6 @@ public class WorkoutPanel extends JPanel {
                 }
             }
         });
-        // Abrir directamente el panel de ejercicios al hacer doble clic en un workout
         workoutList.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -115,11 +111,9 @@ public class WorkoutPanel extends JPanel {
             return;
         }
         try {
-            // Obtener ejercicios del workout seleccionado
             List<Exercise> exercises = ControllerFactory.getInstance()
                 .getExerciseController()
                 .getExercisesByWorkout(selectedWorkout);
-            // Obtener series para cada ejercicio
             Map<Integer, List<Serie>> seriesByExercise = new HashMap<>();
             for (Exercise ex : exercises) {
                 List<Serie> series = ControllerFactory.getInstance()
@@ -127,7 +121,6 @@ public class WorkoutPanel extends JPanel {
                     .getSeriesByExercise(ex);
                 seriesByExercise.put(ex.getId(), series);
             }
-            // Pasar datos al ExercisePanel y navegar
             window.getExercisePanel().setWorkoutData(selectedWorkout, exercises, seriesByExercise);
             window.showPanel(Window.EXERCISE_PANEL);
         } catch (DBException ex) {
@@ -148,7 +141,6 @@ public class WorkoutPanel extends JPanel {
     }
     
     public void loadWorkouts() {
-        // Limpiar modelos antes de cargar
         workoutListModel.clear();
         exerciseListModel.clear();
         
